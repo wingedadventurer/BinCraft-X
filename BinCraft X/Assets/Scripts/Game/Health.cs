@@ -11,7 +11,7 @@ public class Health : MonoBehaviour
         {
             hp = Mathf.Clamp(value, 0, int.MaxValue);
 
-            if (hp == 0)
+            if (hp == 0 && enabled) // TODO: check if "enabled" check is necessary here
             {
                 // TODO: death event
             }
