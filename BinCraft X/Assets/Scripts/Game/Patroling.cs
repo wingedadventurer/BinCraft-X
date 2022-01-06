@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class Patroling : MonoBehaviour
 {
     [Header("0 for no patroling; 1 for moving to single point; 2 or more for patroling")]
