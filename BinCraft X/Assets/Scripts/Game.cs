@@ -10,6 +10,7 @@ public class Game : MonoBehaviour
     const string TEXT_MENU_WIN = "You died!";
     const string TEXT_MENU_LOSE = "You are victorious!";
 
+    public GameObject canvas;
     public GameObject panelPause;
     public Text textPause;
 
@@ -32,6 +33,9 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
+        // in case we disable canvas in editor
+        canvas.SetActive(true);
+
         panelPause.SetActive(false);
     }
 
