@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d9d8b52541c494ab4cdc59298f4186, type: 3}
   m_Name: PurpleSphere
   m_EditorClassIdentifier: 
+  hp: 100
   name: Purple Sphere
   spriteInventory: {fileID: 0}
   mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}

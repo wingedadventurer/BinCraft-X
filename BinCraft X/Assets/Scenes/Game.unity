@@ -530,6 +530,10 @@ PrefabInstance:
       value: Ammo (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
+      propertyPath: amount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
       propertyPath: dataItem
       value: 
       objectReference: {fileID: 11400000, guid: 0c648c2257bdc654eacf098f46a4f6c8, type: 2}
@@ -4746,6 +4750,10 @@ PrefabInstance:
     - target: {fileID: 169948983582022770, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
       propertyPath: m_Name
       value: Ammo
+      objectReference: {fileID: 0}
+    - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
+      propertyPath: amount
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
       propertyPath: dataItem

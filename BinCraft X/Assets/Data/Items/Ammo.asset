@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ammo
   m_EditorClassIdentifier: 
   name: Ammo
+  hp: 0
   spriteInventory: {fileID: 0}
   mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   material: {fileID: 2100000, guid: fd0edfb91dd2b574ca98197052341ecb, type: 2}

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d9d8b52541c494ab4cdc59298f4186, type: 3}
   m_Name: YellowCube
   m_EditorClassIdentifier: 
+  name: Yellow Cube
+  hp: 0
+  spriteInventory: {fileID: 0}
   mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   material: {fileID: 2100000, guid: d2c7091a7af811a48b73e38b12f5b504, type: 2}
-  name: Yellow Cube
-  spriteInventory: {fileID: 0}
