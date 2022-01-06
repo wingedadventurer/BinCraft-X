@@ -8,7 +8,7 @@ public class DataItem : ScriptableObject
     new public string name;
 
     [Header("HP (leave 0 for invincibility)")]
-    public int hp;
+    public float hp;
 
     [Header("Inventory sprite")]
     public Sprite spriteInventory;

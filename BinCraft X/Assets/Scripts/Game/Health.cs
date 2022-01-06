@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    private int hp;
-    public int Hp
+    private float hp;
+    public float Hp
     {
         set
         {
-            hp = Mathf.Clamp(value, 0, int.MaxValue);
+            hp = Mathf.Clamp(value, 0, float.MaxValue);
 
             if (hp == 0 && enabled) // TODO: check if "enabled" check is necessary here
             {
                 // TODO: death event
             }
+        }
+        get
+        {
+            return hp;
         }
     }
 }

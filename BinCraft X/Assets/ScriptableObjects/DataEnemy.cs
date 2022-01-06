@@ -6,7 +6,7 @@ using UnityEngine;
 public class DataEnemy : ScriptableObject
 {
     [Header("HP")]
-    public int hp;
+    public float hp;
 
     [Header("World representation")]
     public Mesh mesh;
