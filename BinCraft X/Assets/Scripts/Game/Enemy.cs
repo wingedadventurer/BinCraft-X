@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
     public DataEnemy data;
 
+    public Gradient gradientHealth;
+
     private MeshFilter mf;
     private MeshRenderer mr;
     private Health health;
@@ -23,6 +25,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         ApplyData();
+        UpdateColorHealth();
     }
 
     private void ApplyData()
@@ -40,9 +43,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    private void UpdateColorHealth()
+    {
+        mr.material.color = gradientHealth.Evaluate(health.GetFactor());
+    }
+
     private void OnHealthChanged()
     {
-        // TODO: color change
+        UpdateColorHealth();
     }
 
     private void OnHealthDepleted()

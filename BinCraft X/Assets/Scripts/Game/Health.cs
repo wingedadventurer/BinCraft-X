@@ -21,6 +21,11 @@ public class Health : MonoBehaviour
         hp = value;
     }
 
+    public float GetFactor()
+    {
+        return hp / hpMax;
+    }
+
     public void SetHPMax(float value, bool updateHP = false)
     {
         hpMax = Mathf.Max(0, value);
