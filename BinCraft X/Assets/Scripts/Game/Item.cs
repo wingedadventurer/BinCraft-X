@@ -20,6 +20,8 @@ public class Item : MonoBehaviour
         mc = GetComponent<MeshCollider>();
         health = GetComponent<Health>();
 
+        health.Depleted.AddListener(OnHealthDepleted);
+
         interactable = GetComponent<Interactable>();
         interactable.Interacted.AddListener(OnInteracted);
         interactable.InteractEnter.AddListener(OnInteractEnter);
@@ -59,6 +61,12 @@ public class Item : MonoBehaviour
         // TODO: add the item to inventory
         
         interactable.interaction.SetPromptText("");
+
+        Destroy(gameObject);
+    }
+
+    private void OnHealthDepleted()
+    {
         Destroy(gameObject);
     }
 }

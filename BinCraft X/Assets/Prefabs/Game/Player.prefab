@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8771793974192032870}
   - component: {fileID: 4470392158604051388}
+  - component: {fileID: 3347987147551219763}
   - component: {fileID: 5762246057294669704}
   - component: {fileID: 2351375404618190326}
   - component: {fileID: 5692526125181518078}
@@ -85,6 +86,18 @@ CharacterController:
   m_SkinWidth: 0.03
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3347987147551219763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308661514319966151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c13cb7e98651d84ab858e9f208c7974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5762246057294669704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,9 +146,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4c432f04da98b4394d758b20a2df6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpStart: 200
-  hpMax: 200
+  Changed:
+    m_PersistentCalls:
+      m_Calls: []
+  Depleted:
+    m_PersistentCalls:
+      m_Calls: []
   hp: 0
+  hpMax: 80
 --- !u!114 &1230972058025004755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,10 +180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43e24480844bed7489fcd7e1ad14e50e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabBullet: {fileID: 4678763312100190925, guid: 55dc44fd93766f44e8a980a6db8aa22c, type: 3}
-  transformBulletSpawn: {fileID: 3907677468117844451}
   bulletSpeed: 20
   bulletDamage: 25
+  transformBulletSpawn: {fileID: 3907677468117844451}
 --- !u!1 &5163562771236228989
 GameObject:
   m_ObjectHideFlags: 0

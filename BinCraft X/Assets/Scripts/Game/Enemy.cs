@@ -15,6 +15,9 @@ public class Enemy : MonoBehaviour
         mf = GetComponent<MeshFilter>();
         mr = GetComponent<MeshRenderer>();
         health = GetComponent<Health>();
+
+        health.Changed.AddListener(OnHealthChanged);
+        health.Depleted.AddListener(OnHealthDepleted);
     }
 
     void Start()
@@ -35,5 +38,15 @@ public class Enemy : MonoBehaviour
             mf.mesh = null;
             mr.material = null;
         }
+    }
+
+    private void OnHealthChanged()
+    {
+        // TODO: color change
+    }
+
+    private void OnHealthDepleted()
+    {
+        Destroy(gameObject);
     }
 }

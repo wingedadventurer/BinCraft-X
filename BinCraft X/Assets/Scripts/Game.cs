@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class Game : MonoBehaviour
 {
     const string TEXT_MENU_PAUSED = "Game Paused";
-    const string TEXT_MENU_WIN = "You died!";
-    const string TEXT_MENU_LOSE = "You are victorious!";
+    const string TEXT_MENU_WIN = "You are victorious!";
+    const string TEXT_MENU_LOSE = "You died!";
 
     public GameObject canvas;
     public GameObject panelPause;

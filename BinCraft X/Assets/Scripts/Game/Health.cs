@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
+    public UnityEvent Changed;
+    public UnityEvent Depleted;
+
     [SerializeField] private float hp;
     [SerializeField] private float hpMax = 100;
 
@@ -29,9 +33,11 @@ public class Health : MonoBehaviour
 
         hp = Mathf.Clamp(hp + amount, 0, hpMax);
 
+        Changed.Invoke();
+
         if (hp == 0)
         {
-            Destroy(gameObject);
+            Depleted.Invoke();
         }
     }
 }
