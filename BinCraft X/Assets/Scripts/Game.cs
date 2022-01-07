@@ -12,6 +12,7 @@ public class Game : MonoBehaviour
 
     public GameObject canvas;
     public GameObject panelPause;
+    public GameObject panelGame;
     public Text textPause;
 
     private bool paused;
@@ -21,6 +22,7 @@ public class Game : MonoBehaviour
         {
             paused = value;
             panelPause.SetActive(paused);
+            panelGame.SetActive(!paused);
             player.GetComponent<MouseLook>().active = !paused;
             player.GetComponent<Movement>().active = !paused;
             Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;

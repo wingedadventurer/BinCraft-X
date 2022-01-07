@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5762246057294669704}
   - component: {fileID: 2351375404618190326}
   - component: {fileID: 5692526125181518078}
-  m_Layer: 0
+  - component: {fileID: 1230972058025004755}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -46,7 +47,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.7
+  m_Height: 1.8
   m_Radius: 0.3
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -82,8 +83,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accMove: 10
   dccMove: 16
-  speedWalkMax: 2.25
-  speedRunMax: 4
+  speedWalkMax: 3
+  speedRunMax: 4.5
   gravity: 12
   speedJump: 4.5
   active: 0
@@ -103,6 +104,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hpStart: 200
   hpMax: 200
+  hp: 0
+--- !u!114 &1230972058025004755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308661514319966151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a89d036a685ab584a851398f26878197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectDistanceMax: 2
+  textInteractPrompt: {fileID: 0}
 --- !u!1 &5163562771236228989
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4970877875814414149}
   - component: {fileID: 884386163586549319}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -128,7 +144,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5163562771236228989}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8771793974192032870}
