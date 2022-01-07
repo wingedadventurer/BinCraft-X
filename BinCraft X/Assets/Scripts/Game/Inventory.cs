@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 struct ItemStack
 {
@@ -10,6 +11,8 @@ struct ItemStack
 
 public class Inventory : MonoBehaviour
 {
+    public UnityEvent Changed;
+
     public static Inventory instance;
 
     public int width;
@@ -29,6 +32,8 @@ public class Inventory : MonoBehaviour
     {
         if (amount == 0) { return 0; }
 
+        bool changed = false;
+
         // if stacks of this item already exist, fill them until depleted
         for (int x = 0; x < width; x++)
         {
@@ -44,10 +49,12 @@ public class Inventory : MonoBehaviour
                         {
                             stack.amount += amountRemaining;
                             amount -= amountRemaining;
+                            changed = true;
                         }
                         else
                         {
                             stack.amount += amount;
+                            Changed.Invoke();
                             return 0;
                         }
                     }
@@ -69,10 +76,12 @@ public class Inventory : MonoBehaviour
                     {
                         stack.amount += stack.data.maxStackCount;
                         amount -= stack.data.maxStackCount;
+                        changed = true;
                     }
                     else
                     {
                         stack.amount += amount;
+                        Changed.Invoke();
                         return 0;
                     }
                 }
@@ -81,7 +90,47 @@ public class Inventory : MonoBehaviour
 
         // if items still remain (amount > 0), return that amount
         Debug.Log(string.Format("<color=orange>Cannot pickup {0} {1}; inventory full!</color>", amount, data.name));
+        if (changed)
+        {
+            Changed.Invoke();
+        }
         return amount;
+    }
+
+    public bool HasItem(DataItem data)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                ref ItemStack stack = ref grid[x, y];
+                if (stack.data == data && stack.amount > 0)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public int GetItemCount(DataItem data)
+    {
+        int count = 0;
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                ref ItemStack stack = ref grid[x, y];
+                if (stack.data == data)
+                {
+                    count += stack.amount;
+                }
+            }
+        }
+
+        return count;
     }
 
     public void Print()

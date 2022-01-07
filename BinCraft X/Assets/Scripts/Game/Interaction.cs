@@ -16,7 +16,7 @@ public class Interaction : MonoBehaviour
     {
         // exclude Player from raycasting   
         mask = ~(1 << LayerMask.NameToLayer("Player"));
-        SetPromptText("");
+        UIGame.instance.SetInteractPrompt("");
     }
 
     private void Update()
@@ -51,7 +51,7 @@ public class Interaction : MonoBehaviour
                 if (interactableLast)
                 {
                     interactableLast = null;
-                    SetPromptText("");
+                    UIGame.instance.SetInteractPrompt("");
                 }
             }
         }
@@ -60,13 +60,8 @@ public class Interaction : MonoBehaviour
             if (interactableLast)
             {
                 interactableLast = null;
-                SetPromptText("");
+                UIGame.instance.SetInteractPrompt("");
             }
         }
-    }
-
-    public void SetPromptText(string text)
-    {
-        textInteractPrompt.text = text;
     }
 }

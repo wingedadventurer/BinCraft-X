@@ -61,7 +61,7 @@ public class Item : MonoBehaviour
         amount = Inventory.instance.AddItem(data, amount);
         if (amount == 0)
         {
-            interactable.interaction.SetPromptText("");
+            UIGame.instance.SetInteractPrompt("");
             Destroy(gameObject);
         }
         else
@@ -82,6 +82,6 @@ public class Item : MonoBehaviour
         {
             s += " (" + amount + ")";
         }
-        interactable.interaction.SetPromptText(s);
+        UIGame.instance.SetInteractPrompt(s);
     }
 }
