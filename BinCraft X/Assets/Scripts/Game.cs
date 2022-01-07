@@ -10,6 +10,9 @@ public class Game : MonoBehaviour
     const string TEXT_MENU_WIN = "You are victorious!";
     const string TEXT_MENU_LOSE = "You died!";
 
+    [SerializeField] private DataItem dataGreenCube;
+    [SerializeField] private DataItem dataYellowCube;
+
     public GameObject canvas;
     public GameObject panelPause;
     public GameObject panelGame;
@@ -38,6 +41,8 @@ public class Game : MonoBehaviour
 
     private GameObject player;
 
+    private int countCubesNeeded;
+
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -49,6 +54,16 @@ public class Game : MonoBehaviour
         canvas.SetActive(true);
 
         Paused = false;
+
+        // get count of needed cubes
+        foreach (Item item in FindObjectsOfType<Item>())
+        {
+            if (item.data == dataGreenCube || item.data == dataYellowCube)
+            {
+                countCubesNeeded++;
+            }
+        }
+        UIGame.instance.SetCubesNeeded(countCubesNeeded);
     }
 
     private void Update()

@@ -8,6 +8,7 @@ public class Shooting : MonoBehaviour
     public float bulletDamage;
 
     [SerializeField] private Transform transformBulletSpawn;
+    [SerializeField] private DataItem dataBullet;
 
     private BulletPool bulletPool;
 
@@ -18,7 +19,11 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) { Shoot(); }
+        if (Input.GetMouseButtonDown(0) && Inventory.instance.HasItem(dataBullet))
+        {
+            Shoot();
+            Inventory.instance.RemoveItem(dataBullet);
+        }
     }
 
     private void Shoot()

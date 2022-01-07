@@ -12,6 +12,9 @@ public class UIGame : MonoBehaviour
     [SerializeField] private Text textAmmo;
     [SerializeField] private Text textCubes;
 
+    private int cubesCurrent;
+    private int cubesNeeded;
+
     private void Awake()
     {
         instance = this;
@@ -19,7 +22,8 @@ public class UIGame : MonoBehaviour
         SetInteractPrompt("");
         SetHealth(0, 100);
         SetAmmo(0);
-        SetCubes(0, 0);
+        SetCubesCurrent(0);
+        SetCubesNeeded(1);
     }
     
     public void SetInteractPrompt(string text)
@@ -38,8 +42,15 @@ public class UIGame : MonoBehaviour
         textAmmo.text = amount.ToString();
     }
 
-    public void SetCubes(int current, int needed)
+    public void SetCubesCurrent(int amount)
     {
-        textCubes.text = current + "/" + needed;
+        cubesCurrent = amount;
+        textCubes.text = cubesCurrent + "/" + cubesNeeded;
+    }
+
+    public void SetCubesNeeded(int amount)
+    {
+        cubesNeeded = amount;
+        textCubes.text = cubesCurrent + "/" + cubesNeeded;
     }
 }

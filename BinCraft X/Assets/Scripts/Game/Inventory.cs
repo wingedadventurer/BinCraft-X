@@ -114,6 +114,27 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
+    public void RemoveItem(DataItem data)
+    {
+        for (int x = width - 1; x >= 0; x--)
+        {
+            for (int y = height - 1; y >= 0; y--)
+            {
+                ref ItemStack stack = ref grid[x, y];
+                if (stack.data == data && stack.amount > 0)
+                {
+                    stack.amount--;
+                    if (stack.amount == 0)
+                    {
+                        stack.data = null;
+                    }
+                    Changed.Invoke();
+                    return;
+                }
+            }
+        }
+    }
+
     public int GetItemCount(DataItem data)
     {
         int count = 0;

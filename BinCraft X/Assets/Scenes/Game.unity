@@ -705,6 +705,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08bd4bf80aa3b2f44a0f4cd9f4538023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataGreenCube: {fileID: 11400000, guid: d90463d1e60047c448c53d80a014d55c, type: 2}
+  dataYellowCube: {fileID: 11400000, guid: 277371f452c963641b4a4174fefaf535, type: 2}
   canvas: {fileID: 1593465923}
   panelPause: {fileID: 446665085}
   panelGame: {fileID: 36508315}

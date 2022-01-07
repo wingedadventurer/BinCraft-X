@@ -47,6 +47,6 @@ public class Player : MonoBehaviour
 
         // cubes
         int countCubes = Inventory.instance.GetItemCount(itemGreenCube) + Inventory.instance.GetItemCount(itemYellowCube);
-        UIGame.instance.SetCubes(countCubes, 999);
+        UIGame.instance.SetCubesCurrent(countCubes);
     }
 }

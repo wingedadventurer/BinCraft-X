@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 1161883017923547687}
   m_Layer: 0
   m_Name: Item
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,6 +142,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4c432f04da98b4394d758b20a2df6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Changed:
+    m_PersistentCalls:
+      m_Calls: []
+  Depleted:
+    m_PersistentCalls:
+      m_Calls: []
   hp: 0
   hpMax: 999999
 --- !u!114 &1161883017923547687
