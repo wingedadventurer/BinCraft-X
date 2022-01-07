@@ -81,8 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 407462bbc09dcae429842c3d939cae88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accMove: 10
-  dccMove: 16
+  accMove: 15
+  dccMove: 20
   speedWalkMax: 3
   speedRunMax: 4.5
   gravity: 12
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectDistanceMax: 2
+  text: 
   textInteractPrompt: {fileID: 0}
 --- !u!1 &5163562771236228989
 GameObject:

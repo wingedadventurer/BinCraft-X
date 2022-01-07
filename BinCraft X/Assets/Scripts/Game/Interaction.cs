@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Interaction : MonoBehaviour
 {
     public float detectDistanceMax = 1.5f;
-    public Text textInteractPrompt;
+
+    [SerializeField] private Text textInteractPrompt;
 
     private Interactable interactableLast;
     private int mask;
@@ -15,8 +16,7 @@ public class Interaction : MonoBehaviour
     {
         // exclude Player from raycasting   
         mask = ~(1 << LayerMask.NameToLayer("Player"));
-
-        UpdatePromptText();
+        SetPromptText("");
     }
 
     private void Update()
@@ -24,6 +24,7 @@ public class Interaction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && interactableLast)
         {
             // TODO: interact
+            interactableLast.Interacted.Invoke();
         }
     }
     
@@ -42,7 +43,8 @@ public class Interaction : MonoBehaviour
                 if (interactableLast != interactable)
                 {
                     interactableLast = interactable;
-                    UpdatePromptText();
+                    interactableLast.interaction = this;
+                    interactableLast.InteractEnter.Invoke();
                 }
             }
             else
@@ -50,7 +52,7 @@ public class Interaction : MonoBehaviour
                 if (interactableLast)
                 {
                     interactableLast = null;
-                    UpdatePromptText();
+                    SetPromptText("");
                 }
             }
         }
@@ -59,20 +61,13 @@ public class Interaction : MonoBehaviour
             if (interactableLast)
             {
                 interactableLast = null;
-                UpdatePromptText();
+                SetPromptText("");
             }
         }
     }
 
-    private void UpdatePromptText()
+    public void SetPromptText(string text)
     {
-        if (interactableLast)
-        {
-            textInteractPrompt.text = "[E] Pick up NAME_OF_THE_OBJECT";
-        }
-        else
-        {
-            textInteractPrompt.text = "";
-        }
+        textInteractPrompt.text = text;
     }
 }

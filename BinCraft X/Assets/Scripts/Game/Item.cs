@@ -11,6 +11,7 @@ public class Item : MonoBehaviour
     private MeshRenderer mr;
     private MeshCollider mc;
     private Health health;
+    private Interactable interactable;
 
     private void Awake()
     {
@@ -18,6 +19,10 @@ public class Item : MonoBehaviour
         mr = GetComponent<MeshRenderer>();
         mc = GetComponent<MeshCollider>();
         health = GetComponent<Health>();
+
+        interactable = GetComponent<Interactable>();
+        interactable.Interacted.AddListener(OnInteracted);
+        interactable.InteractEnter.AddListener(OnInteractEnter);
     }
 
     void Start()
@@ -42,5 +47,18 @@ public class Item : MonoBehaviour
             mc.sharedMesh = null;
             health.enabled = false;
         }
+    }
+
+    public void OnInteractEnter()
+    {
+        interactable.interaction.SetPromptText("[E] Pick up " + dataItem.name);
+    }
+
+    public void OnInteracted()
+    {
+        // TODO: add the item to inventory
+        
+        interactable.interaction.SetPromptText("");
+        Destroy(gameObject);
     }
 }
