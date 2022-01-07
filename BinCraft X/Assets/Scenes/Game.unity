@@ -308,6 +308,10 @@ PrefabInstance:
       value: YellowCube
       objectReference: {fileID: 0}
     - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 277371f452c963641b4a4174fefaf535, type: 2}
+    - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
       propertyPath: dataItem
       value: 
       objectReference: {fileID: 11400000, guid: 277371f452c963641b4a4174fefaf535, type: 2}
@@ -373,6 +377,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreenCube (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: d90463d1e60047c448c53d80a014d55c, type: 2}
     - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
       propertyPath: dataItem
       value: 
@@ -810,6 +818,10 @@ PrefabInstance:
       value: Ammo (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c648c2257bdc654eacf098f46a4f6c8, type: 2}
+    - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
       propertyPath: amount
       value: 20
       objectReference: {fileID: 0}
@@ -874,6 +886,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PurpleSphere (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f459118c226ae24abef659f5aa6ef31, type: 2}
     - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
       propertyPath: dataItem
       value: 
@@ -2718,6 +2734,10 @@ PrefabInstance:
       value: YellowCube (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 277371f452c963641b4a4174fefaf535, type: 2}
+    - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
       propertyPath: dataItem
       value: 
       objectReference: {fileID: 11400000, guid: 277371f452c963641b4a4174fefaf535, type: 2}
@@ -4080,6 +4100,10 @@ PrefabInstance:
       value: PurpleSphere (3)
       objectReference: {fileID: 0}
     - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f459118c226ae24abef659f5aa6ef31, type: 2}
+    - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
       propertyPath: dataItem
       value: 
       objectReference: {fileID: 11400000, guid: 5f459118c226ae24abef659f5aa6ef31, type: 2}
@@ -4140,6 +4164,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreenCube (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: d90463d1e60047c448c53d80a014d55c, type: 2}
     - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
       propertyPath: dataItem
       value: 
@@ -5123,6 +5151,10 @@ PrefabInstance:
       value: PurpleSphere (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f459118c226ae24abef659f5aa6ef31, type: 2}
+    - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
       propertyPath: dataItem
       value: 
       objectReference: {fileID: 11400000, guid: 5f459118c226ae24abef659f5aa6ef31, type: 2}
@@ -5441,6 +5473,10 @@ PrefabInstance:
       value: PurpleSphere
       objectReference: {fileID: 0}
     - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f459118c226ae24abef659f5aa6ef31, type: 2}
+    - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
       propertyPath: dataItem
       value: 
       objectReference: {fileID: 11400000, guid: 5f459118c226ae24abef659f5aa6ef31, type: 2}
@@ -5753,6 +5789,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ammo
       objectReference: {fileID: 0}
+    - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c648c2257bdc654eacf098f46a4f6c8, type: 2}
     - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
       propertyPath: amount
       value: 5
@@ -6161,6 +6201,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GreenCube
       objectReference: {fileID: 0}
+    - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: d90463d1e60047c448c53d80a014d55c, type: 2}
     - target: {fileID: 1195096838285603590, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
       propertyPath: dataItem
       value: 

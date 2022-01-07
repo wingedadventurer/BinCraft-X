@@ -11,7 +11,7 @@ public class HealthConstantModifier : MonoBehaviour
         Health health = other.gameObject.GetComponent<Health>();
         if (health)
         {
-            health.Hp += rate * Time.deltaTime;
+            health.ChangeBy(rate * Time.deltaTime);
         }
     }
 }

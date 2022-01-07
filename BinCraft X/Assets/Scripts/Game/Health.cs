@@ -4,29 +4,34 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public float hpStart;
-    public float hpMax = 999999;
-
-    public float hp;
-    public float Hp
-    {
-        set
-        {
-            hp = Mathf.Clamp(value, 0, hpMax);
-
-            if (hp == 0 && enabled) // TODO: check if "enabled" check is necessary here
-            {
-                // TODO: death event
-            }
-        }
-        get
-        {
-            return hp;
-        }
-    }
+    [SerializeField] private float hp;
+    [SerializeField] private float hpMax = 100;
 
     private void Start()
     {
-        Hp = hpStart;
+        hp = hpMax;
+    }
+
+    public void SetHP(float value)
+    {
+        hp = value;
+    }
+
+    public void SetHPMax(float value, bool updateHP = false)
+    {
+        hpMax = Mathf.Max(0, value);
+        hp = updateHP ? hpMax : Mathf.Min(hp, hpMax);
+    }
+
+    public void ChangeBy(float amount)
+    {
+        if (!enabled) { return; }
+
+        hp = Mathf.Clamp(hp + amount, 0, hpMax);
+
+        if (hp == 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -23,7 +23,6 @@ public class Interaction : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && interactableLast)
         {
-            // TODO: interact
             interactableLast.Interacted.Invoke();
         }
     }

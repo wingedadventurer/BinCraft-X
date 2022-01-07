@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
         {
             mf.mesh = data.mesh;
             mr.material = data.material;
-            health.Hp = data.hp;
+            health.SetHPMax(data.hp, true);
         }
         else
         {

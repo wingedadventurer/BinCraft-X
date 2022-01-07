@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public DataItem dataItem;
+    public DataItem data;
     public int amount = 1;
 
     private MeshFilter mf;
@@ -32,13 +32,13 @@ public class Item : MonoBehaviour
 
     private void ApplyData()
     {
-        if (dataItem)
+        if (data)
         {
-            mf.mesh = dataItem.mesh;
-            mr.material = dataItem.material;
+            mf.mesh = data.mesh;
+            mr.material = data.material;
             mc.sharedMesh = mf.mesh;
-            health.enabled = dataItem.hp > 0;
-            health.Hp = dataItem.hp;
+            health.enabled = data.hp > 0;
+            health.SetHPMax(data.hp, true);
         }
         else
         {
@@ -51,7 +51,7 @@ public class Item : MonoBehaviour
 
     public void OnInteractEnter()
     {
-        interactable.interaction.SetPromptText("[E] Pick up " + dataItem.name);
+        interactable.interaction.SetPromptText("[E] Pick up " + data.name);
     }
 
     public void OnInteracted()
