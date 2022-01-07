@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    private float hp;
+    public float hpStart;
+    public float hpMax = 999999;
+
+    public float hp;
     public float Hp
     {
         set
         {
-            hp = Mathf.Clamp(value, 0, float.MaxValue);
+            hp = Mathf.Clamp(value, 0, hpMax);
 
             if (hp == 0 && enabled) // TODO: check if "enabled" check is necessary here
             {
@@ -20,5 +23,10 @@ public class Health : MonoBehaviour
         {
             return hp;
         }
+    }
+
+    private void Start()
+    {
+        Hp = hpStart;
     }
 }

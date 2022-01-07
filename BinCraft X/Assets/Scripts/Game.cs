@@ -21,6 +21,9 @@ public class Game : MonoBehaviour
         {
             paused = value;
             panelPause.SetActive(paused);
+            player.GetComponent<MouseLook>().active = !paused;
+            player.GetComponent<Movement>().active = !paused;
+            Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
         }
         get
         {
@@ -31,12 +34,19 @@ public class Game : MonoBehaviour
     // set to false on game win or lose
     private bool running = true;
 
+    private GameObject player;
+
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
     private void Start()
     {
         // in case we disable canvas in editor
         canvas.SetActive(true);
 
-        panelPause.SetActive(false);
+        Paused = false;
     }
 
     private void Update()
