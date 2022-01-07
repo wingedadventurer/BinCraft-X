@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    public GameObject prefabBullet;
-    public Transform transformBulletSpawn;
-
     public float bulletSpeed;
     public float bulletDamage;
 
+    [SerializeField] private Transform transformBulletSpawn;
+
+    private BulletPool bulletPool;
+
+    private void Awake()
+    {
+        bulletPool = FindObjectOfType<BulletPool>();
+    }
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Shoot();
-        }
+        if (Input.GetMouseButtonDown(0)) { Shoot(); }
     }
 
     private void Shoot()
@@ -28,8 +31,9 @@ public class Shooting : MonoBehaviour
 
         var ray = Camera.main.ScreenPointToRay(new Vector3(xAcc, yAcc, 0));
 
-        GameObject bullet = Instantiate(prefabBullet, transformBulletSpawn.position, Quaternion.identity);
+        GameObject bullet = bulletPool.Get();
+        bullet.transform.position = transformBulletSpawn.transform.position;
         bullet.GetComponent<Bullet>().damage = bulletDamage;
-        bullet.GetComponent<Rigidbody>().velocity += ray.direction * bulletSpeed;
+        bullet.GetComponent<Rigidbody>().velocity = ray.direction * bulletSpeed;
     }
 }
