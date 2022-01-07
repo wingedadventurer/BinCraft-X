@@ -53,20 +53,35 @@ public class Item : MonoBehaviour
 
     public void OnInteractEnter()
     {
-        interactable.interaction.SetPromptText("[E] Pick up " + data.name);
+        UpdateInteractionText();
     }
 
     public void OnInteracted()
     {
-        // TODO: add the item to inventory
-        
-        interactable.interaction.SetPromptText("");
-
-        Destroy(gameObject);
+        amount = Inventory.instance.AddItem(data, amount);
+        if (amount == 0)
+        {
+            interactable.interaction.SetPromptText("");
+            Destroy(gameObject);
+        }
+        else
+        {
+            UpdateInteractionText();
+        }
     }
 
     private void OnHealthDepleted()
     {
         Destroy(gameObject);
+    }
+
+    private void UpdateInteractionText()
+    {
+        string s = "[E] Pick up " + data.name;
+        if (amount > 1)
+        {
+            s += " (" + amount + ")";
+        }
+        interactable.interaction.SetPromptText(s);
     }
 }

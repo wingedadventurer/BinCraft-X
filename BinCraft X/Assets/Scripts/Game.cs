@@ -64,6 +64,9 @@ public class Game : MonoBehaviour
             // DEBUG: test game win and lose
             if (Input.GetKeyDown(KeyCode.Alpha9)) { OnGameWin(); }
             if (Input.GetKeyDown(KeyCode.Alpha0)) { OnGameLose(); }
+
+            // DEBUG: print inventory
+            if (Input.GetKeyDown(KeyCode.P)) { Inventory.instance.Print(); }
         }
     }
 

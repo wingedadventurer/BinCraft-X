@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Ammo
   m_EditorClassIdentifier: 
   name: Ammo
+  maxStackCount: 100
   hp: 0
   spriteInventory: {fileID: 0}
   mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}

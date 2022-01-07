@@ -7,6 +7,8 @@ public class DataItem : ScriptableObject
 {
     new public string name;
 
+    public int maxStackCount = 1;
+
     [Header("HP (leave 0 for invincibility)")]
     public float hp;
 
