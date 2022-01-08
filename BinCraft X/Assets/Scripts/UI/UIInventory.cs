@@ -10,6 +10,8 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private GameObject prefabInventorySlot;
     [SerializeField] private GameObject containerInventorySlot;
     [SerializeField] private GridLayoutGroup containerGridLayoutGroup;
+    [SerializeField] private UIInventorySlot slotMouse;
+    [SerializeField] private RectTransform rectTransformSlotMouse;
 
     private UIInventorySlot[,] slots;
 
@@ -24,6 +26,16 @@ public class UIInventory : MonoBehaviour
         UpdateSlots();
 
         Inventory.instance.Changed.AddListener(UpdateSlots);
+    }
+
+    private void Update()
+    {
+        // move mouse slot to mouse + add offset
+        rectTransformSlotMouse.position = Input.mousePosition;
+        // move to bottom-right
+        rectTransformSlotMouse.position += new Vector3(rectTransformSlotMouse.rect.size.x, -rectTransformSlotMouse.rect.size.y, 0) * 0.5f;
+        // apply offset
+        rectTransformSlotMouse.position += new Vector3(40, 0, 0);
     }
 
     public void AddSlots()
