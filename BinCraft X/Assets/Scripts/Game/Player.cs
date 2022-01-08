@@ -26,7 +26,6 @@ public class Player : MonoBehaviour
         UpdateAmmoAndCubesUI();
     }
 
-    // TODO: move this to Game
     private void OnHealthDepleted()
     {
         Game.instance.OnGameLose();

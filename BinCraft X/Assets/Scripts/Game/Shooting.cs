@@ -10,13 +10,6 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Transform transformBulletSpawn;
     [SerializeField] private DataItem dataBullet;
 
-    private BulletPool bulletPool;
-
-    private void Awake()
-    {
-        bulletPool = FindObjectOfType<BulletPool>();
-    }
-
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && Game.instance.playerControllable && Inventory.instance.HasItem(dataBullet))
@@ -36,7 +29,7 @@ public class Shooting : MonoBehaviour
 
         var ray = Camera.main.ScreenPointToRay(new Vector3(xAcc, yAcc, 0));
 
-        GameObject bullet = bulletPool.Get();
+        GameObject bullet = BulletPool.instance.Get();
         bullet.transform.position = transformBulletSpawn.transform.position;
         bullet.GetComponent<Bullet>().damage = bulletDamage;
         bullet.GetComponent<Rigidbody>().velocity = ray.direction * bulletSpeed;

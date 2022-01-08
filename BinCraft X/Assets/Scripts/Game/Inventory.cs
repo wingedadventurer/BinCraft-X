@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-struct ItemStack
+public struct ItemStack
 {
     public DataItem data;
     public int amount;
@@ -11,9 +11,9 @@ struct ItemStack
 
 public class Inventory : MonoBehaviour
 {
-    public UnityEvent Changed;
-
     public static Inventory instance;
+
+    public UnityEvent Changed;
 
     public int width;
     public int height;
@@ -25,11 +25,6 @@ public class Inventory : MonoBehaviour
         instance = this;
 
         grid = new ItemStack[width, height];
-    }
-
-    private void Start()
-    {
-        UIInventory.instance.AddSlots(width, height);
     }
 
     // returns remaining item count if it didn't fit the inventory
@@ -178,5 +173,10 @@ public class Inventory : MonoBehaviour
         s += "\n";
 
         Debug.Log(s);
+    }
+
+    public ref ItemStack GetItemStack(int x, int y)
+    {
+        return ref grid[x, y];
     }
 }

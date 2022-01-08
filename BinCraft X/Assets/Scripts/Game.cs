@@ -44,7 +44,7 @@ public class Game : MonoBehaviour
             FindObjectOfType<MouseLook>().enabled = !paused;
             FindObjectOfType<Interaction>().enabled = !paused;
             FindObjectOfType<Shooting>().enabled = !paused;
-            FindObjectOfType<BulletPool>().SetBulletsEnabled(!paused);
+            BulletPool.instance.SetBulletsEnabled(!paused);
 
             // NOTE: this works weird and agent loses their velocity on resume
             foreach (NavMeshAgent nma in FindObjectsOfType<NavMeshAgent>()) { nma.isStopped = paused; }
