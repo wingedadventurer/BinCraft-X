@@ -8,6 +8,8 @@ public class HealthConstantModifier : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (!enabled) { return; }
+
         Health health = other.gameObject.GetComponent<Health>();
         if (health)
         {

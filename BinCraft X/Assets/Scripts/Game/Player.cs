@@ -8,12 +8,10 @@ public class Player : MonoBehaviour
     [SerializeField] private DataItem itemGreenCube;
     [SerializeField] private DataItem itemYellowCube;
 
-    private Game game;
     private Health health;
 
     private void Awake()
     {
-        game = FindObjectOfType<Game>();
         health = GetComponent<Health>();
     }
 
@@ -28,11 +26,10 @@ public class Player : MonoBehaviour
         UpdateAmmoAndCubesUI();
     }
 
-    
-
+    // TODO: move this to Game
     private void OnHealthDepleted()
     {
-        game.OnGameLose();
+        Game.instance.OnGameLose();
     }
 
     private void UpdateHealthUI()

@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
+    public static Game instance;
+
     const string TEXT_MENU_PAUSED = "Game Paused";
     const string TEXT_MENU_WIN = "You are victorious!";
     const string TEXT_MENU_LOSE = "You died!";
@@ -16,7 +19,17 @@ public class Game : MonoBehaviour
     public GameObject canvas;
     public GameObject panelPause;
     public GameObject panelGame;
+    public GameObject panelInventory;
     public Text textPause;
+
+    public bool playerControllable;
+
+    // set to false on game win or lose
+    private bool running = true;
+
+    private Player player;
+
+    private int countCubesNeeded;
 
     private bool paused;
     public bool Paused
@@ -26,9 +39,20 @@ public class Game : MonoBehaviour
             paused = value;
             panelPause.SetActive(paused);
             panelGame.SetActive(!paused);
-            player.GetComponent<MouseLook>().active = !paused;
-            player.GetComponent<Movement>().active = !paused;
-            Cursor.lockState = paused ? CursorLockMode.None : CursorLockMode.Locked;
+
+            FindObjectOfType<Movement>().enabled = !paused;
+            FindObjectOfType<MouseLook>().enabled = !paused;
+            FindObjectOfType<Interaction>().enabled = !paused;
+            FindObjectOfType<Shooting>().enabled = !paused;
+            FindObjectOfType<BulletPool>().SetBulletsEnabled(!paused);
+
+            // NOTE: this works weird and agent loses their velocity on resume
+            foreach (NavMeshAgent nma in FindObjectsOfType<NavMeshAgent>()) { nma.isStopped = paused; }
+
+            foreach (Patroling patroling in FindObjectsOfType<Patroling>()) { patroling.enabled = !paused; }
+            foreach (HealthConstantModifier healthConstantModifier in FindObjectsOfType<HealthConstantModifier>()) { healthConstantModifier.enabled = !paused; }
+
+            SetMouseLocked(!paused);
         }
         get
         {
@@ -36,24 +60,22 @@ public class Game : MonoBehaviour
         }
     }
 
-    // set to false on game win or lose
-    private bool running = true;
-
-    private GameObject player;
-
-    private int countCubesNeeded;
-
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        instance = this;
+
+        player = FindObjectOfType<Player>();
     }
 
     private void Start()
     {
-        // in case we disable canvas in editor
         canvas.SetActive(true);
+        panelPause.SetActive(false);
+        panelGame.SetActive(true);
+        panelInventory.SetActive(false);
 
         Paused = false;
+        playerControllable = true;
 
         // get count of needed cubes
         foreach (Item item in FindObjectsOfType<Item>())
@@ -70,10 +92,29 @@ public class Game : MonoBehaviour
     {
         if (running)
         {
+            // pause menu
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Paused = !Paused;
-                textPause.text = TEXT_MENU_PAUSED;
+                if (panelInventory.activeSelf)
+                {
+                    panelInventory.SetActive(false);
+                    SetMouseLocked(true);
+                    playerControllable = true;
+                }
+                else
+                {
+                    Paused = !Paused;
+                    textPause.text = TEXT_MENU_PAUSED;
+                }
+            }
+
+            // inventory
+            if (Input.GetKeyDown(KeyCode.Tab) && !paused)
+            {
+                bool inventoryVisible = !panelInventory.activeSelf;
+                panelInventory.SetActive(inventoryVisible);
+                SetMouseLocked(!inventoryVisible);
+                playerControllable = !inventoryVisible;
             }
 
             // DEBUG: test game win and lose
@@ -107,5 +148,10 @@ public class Game : MonoBehaviour
         running = false;
         Paused = true;
         textPause.text = TEXT_MENU_LOSE;
+    }
+
+    private void SetMouseLocked(bool value)
+    {
+        Cursor.lockState = value ? CursorLockMode.Locked : CursorLockMode.None;
     }
 }

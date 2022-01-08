@@ -22,10 +22,15 @@ public class Enemy : MonoBehaviour
         health.Depleted.AddListener(OnHealthDepleted);
     }
 
-    void Start()
+    private void Start()
     {
         ApplyData();
         UpdateColorHealth();
+    }
+
+    public void SetActive(bool value)
+    {
+
     }
 
     private void ApplyData()

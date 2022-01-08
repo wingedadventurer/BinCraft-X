@@ -7,21 +7,21 @@ public class Interaction : MonoBehaviour
 {
     public float detectDistanceMax = 1.5f;
 
-    [SerializeField] private Text textInteractPrompt;
+    public bool controllable;
 
     private Interactable interactableLast;
     private int mask;
 
     private void Start()
     {
-        // exclude Player from raycasting   
+        // exclude Player from raycasting
         mask = ~(1 << LayerMask.NameToLayer("Player"));
         UIGame.instance.SetInteractPrompt("");
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && interactableLast)
+        if (Input.GetKeyDown(KeyCode.E) && Game.instance.playerControllable && interactableLast)
         {
             interactableLast.Interacted.Invoke();
         }

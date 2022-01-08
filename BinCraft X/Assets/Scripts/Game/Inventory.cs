@@ -27,6 +27,11 @@ public class Inventory : MonoBehaviour
         grid = new ItemStack[width, height];
     }
 
+    private void Start()
+    {
+        UIInventory.instance.AddSlots(width, height);
+    }
+
     // returns remaining item count if it didn't fit the inventory
     public int AddItem(DataItem data, int amount)
     {

@@ -19,7 +19,7 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Inventory.instance.HasItem(dataBullet))
+        if (Input.GetMouseButtonDown(0) && Game.instance.playerControllable && Inventory.instance.HasItem(dataBullet))
         {
             Shoot();
             Inventory.instance.RemoveItem(dataBullet);
