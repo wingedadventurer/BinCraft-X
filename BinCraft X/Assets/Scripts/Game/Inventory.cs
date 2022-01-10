@@ -175,8 +175,16 @@ public class Inventory : MonoBehaviour
         Debug.Log(s);
     }
 
-    public ref ItemStack GetItemStack(int x, int y)
+    public ItemStack GetItemStack(int x, int y)
     {
-        return ref grid[x, y];
+        return grid[x, y];
+    }
+
+    public void SwapItemStacks(int xFrom, int yFrom, int xTo, int yTo)
+    {
+        ItemStack temp = grid[xTo, yTo];
+        grid[xTo, yTo] = grid[xFrom, yFrom];
+        grid[xFrom, yFrom] = temp;
+        Changed.Invoke();
     }
 }

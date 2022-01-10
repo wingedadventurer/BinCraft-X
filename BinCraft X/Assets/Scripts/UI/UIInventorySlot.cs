@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIInventorySlot : MonoBehaviour
 {
-    public UnityEvent Pressed, Released, Dropped;
+    public UnityEvent Pressed, Released, Dragged, Dropped;
 
     [HideInInspector] public int x;
     [HideInInspector] public int y;
@@ -47,7 +47,7 @@ public class UIInventorySlot : MonoBehaviour
 
     public void Drag()
     {
-
+        Dragged.Invoke();
     }
 
     public void Drop()

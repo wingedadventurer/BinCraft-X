@@ -14,6 +14,9 @@ public class UIInventory : MonoBehaviour
 
     private UIInventorySlot[,] slots;
     [SerializeField] private UIInventorySlot slotHand;
+    
+    public UIInventorySlot slotDragged;
+    private bool dragged;
 
     private void Awake()
     {
@@ -24,6 +27,7 @@ public class UIInventory : MonoBehaviour
     {
         AddSlots();
         UpdateSlots();
+        UpdateDragSlot();
 
         Inventory.instance.Changed.AddListener(UpdateSlots);
     }
@@ -58,6 +62,7 @@ public class UIInventory : MonoBehaviour
                 //slot.gameObject.GetComponent<Button>().onClick.AddListener(delegate { OnSlotPressed(slot); });
                 slot.Pressed.AddListener(delegate { OnSlotPressed(slot); } );
                 slot.Released.AddListener(delegate { OnSlotReleased(slot); } );
+                slot.Dragged.AddListener(delegate { OnSlotDragged(slot); } );
                 slot.Dropped.AddListener(delegate { OnSlotDropped(slot); } );
             }
         }
@@ -76,32 +81,71 @@ public class UIInventory : MonoBehaviour
                 slot.SetAmount(itemStack.amount);
             }
         }
+    }
 
-        // hand slot
-        //ItemStack itemStackHand = inventory.GetHand();
-        //slotHand.gameObject.SetActive(itemStackHand.data); // hide if hand is empty
-        //slotHand.SetSprite(itemStackHand.data ? itemStackHand.data.spriteInventory : null);
-        //slotHand.SetAmount(itemStackHand.amount);
+    public void UpdateDragSlot()
+    {
+        Inventory inventory = Inventory.instance;
+        if (slotDragged)
+        {
+            slotHand.gameObject.SetActive(true);
+            ItemStack itemStackHand = inventory.GetItemStack(slotDragged.x, slotDragged.y);
+            slotHand.SetSprite(itemStackHand.data ? itemStackHand.data.spriteInventory : null);
+            slotHand.SetAmount(itemStackHand.amount);
+        }
+        else
+        {
+            slotHand.gameObject.SetActive(false);
+        }
     }
 
     public void OnSlotPressed(UIInventorySlot slot)
     {
-        Debug.Log("pressed slot " + slot.x + " " + slot.y);
+        return;
 
-        // TODO: do stuff
+        slotDragged = slot;
+        UpdateDragSlot();
+
+        Debug.Log("pressed slot " + slot.x + " " + slot.y);
     }
 
     public void OnSlotReleased(UIInventorySlot slot)
     {
-        Debug.Log("released slot " + slot.x + " " + slot.y);
+        if (!dragged)
+        {
+            if (slotDragged)
+            {
+                slotDragged = null;
+                UpdateDragSlot();
+            }
+        }
 
-        // TODO: do stuff
+        Debug.Log("released slot " + slot.x + " " + slot.y);
+    }
+
+    public void OnSlotDragged(UIInventorySlot slot)
+    {
+        dragged = true;
+
+        slotDragged = slot;
+        UpdateDragSlot();
+
+        //Debug.Log("dragged slot " + slot.x + " " + slot.y);
     }
 
     public void OnSlotDropped(UIInventorySlot slot)
     {
-        Debug.Log("dropped slot " + slot.x + " " + slot.y);
+        if (dragged && slotDragged)
+        {
+            if (slotDragged != slot)
+            {
+                Inventory.instance.SwapItemStacks(slotDragged.x, slotDragged.y, slot.x, slot.y);
+            }
+            slotDragged = null;
+            dragged = false;
+            UpdateDragSlot();
+        }
 
-        // TODO: do stuff
+        Debug.Log("dropped slot " + slot.x + " " + slot.y);
     }
 }
