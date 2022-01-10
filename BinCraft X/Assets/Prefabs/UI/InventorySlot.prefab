@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 9110132105006714032}
   - component: {fileID: 9110132105006714033}
   - component: {fileID: 5513694127843565854}
-  - component: {fileID: 7843625185611927920}
+  - component: {fileID: 3830187648873379022}
   m_Layer: 5
   m_Name: InventorySlot
   m_TagString: Untagged
@@ -306,17 +306,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d18f4a7a3e047814d99bf035e51691e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 4972090965471174311}
+  text: {fileID: 7223512100681420253}
+  x: 0
+  y: 0
+  Entered:
+    m_PersistentCalls:
+      m_Calls: []
+  Exited:
+    m_PersistentCalls:
+      m_Calls: []
   Pressed:
     m_PersistentCalls:
       m_Calls: []
   Released:
     m_PersistentCalls:
       m_Calls: []
-  x: 0
-  y: 0
-  image: {fileID: 4972090965471174311}
-  text: {fileID: 7223512100681420253}
---- !u!114 &7843625185611927920
+  RightPressed:
+    m_PersistentCalls:
+      m_Calls: []
+  RightReleased:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3830187648873379022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -328,68 +340,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5513694127843565854}
-          m_TargetAssemblyTypeName: UIInventorySlot, Assembly-CSharp
-          m_MethodName: SetPressed
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5513694127843565854}
-          m_TargetAssemblyTypeName: UIInventorySlot, Assembly-CSharp
-          m_MethodName: SetPressed
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 5
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5513694127843565854}
-          m_TargetAssemblyTypeName: UIInventorySlot, Assembly-CSharp
-          m_MethodName: Drag
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  - eventID: 6
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 5513694127843565854}
-          m_TargetAssemblyTypeName: UIInventorySlot, Assembly-CSharp
-          m_MethodName: Drop
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  m_Delegates: []

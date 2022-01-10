@@ -14,10 +14,12 @@ public class UIInventory : MonoBehaviour
 
     private UIInventorySlot[,] slots;
     [SerializeField] private UIInventorySlot slotHand;
-    
-    private UIInventorySlot slotDragged;
 
-    private bool willClearDrag;
+    private UIInventorySlot slotHovered;
+    private UIInventorySlot slotPressed;
+    private UIInventorySlot slotRightPressed;
+
+    private bool willClearPressed;
 
     private void Awake()
     {
@@ -42,10 +44,11 @@ public class UIInventory : MonoBehaviour
         // apply offset
         rectTransformSlotHand.position += new Vector3(40, 0, 0);
 
-        if (willClearDrag)
+        if (willClearPressed)
         {
-            willClearDrag = false;
-            slotDragged = null;
+            willClearPressed = false;
+            slotHovered = null;
+            slotPressed = null;
             UpdateDragSlot();
         }
     }
@@ -68,10 +71,12 @@ public class UIInventory : MonoBehaviour
                 slot.x = x;
                 slot.y = y;
                 //slot.gameObject.GetComponent<Button>().onClick.AddListener(delegate { OnSlotPressed(slot); });
+                slot.Entered.AddListener(delegate { OnSlotEntered(slot); } );
+                slot.Exited.AddListener(delegate { OnSlotExited(slot); } );
                 slot.Pressed.AddListener(delegate { OnSlotPressed(slot); } );
                 slot.Released.AddListener(delegate { OnSlotReleased(slot); } );
-                slot.Dragged.AddListener(delegate { OnSlotDragged(slot); } );
-                slot.Dropped.AddListener(delegate { OnSlotDropped(slot); } );
+                slot.RightPressed.AddListener(delegate { OnSlotRightPressed(slot); } );
+                slot.RightReleased.AddListener(delegate { OnSlotRightReleased(slot); } );
             }
         }
     }
@@ -94,10 +99,17 @@ public class UIInventory : MonoBehaviour
     public void UpdateDragSlot()
     {
         Inventory inventory = Inventory.instance;
-        if (slotDragged)
+        if (slotRightPressed)
         {
             slotHand.gameObject.SetActive(true);
-            ItemStack itemStackHand = inventory.GetItemStack(slotDragged.x, slotDragged.y);
+            ItemStack itemStackHand = inventory.GetItemStack(slotRightPressed.x, slotRightPressed.y);
+            slotHand.SetSprite(itemStackHand.data ? itemStackHand.data.spriteInventory : null);
+            slotHand.SetAmount(itemStackHand.amount);
+        }
+        else if (slotPressed)
+        {
+            slotHand.gameObject.SetActive(true);
+            ItemStack itemStackHand = inventory.GetItemStack(slotPressed.x, slotPressed.y);
             slotHand.SetSprite(itemStackHand.data ? itemStackHand.data.spriteInventory : null);
             slotHand.SetAmount(itemStackHand.amount);
         }
@@ -107,46 +119,52 @@ public class UIInventory : MonoBehaviour
         }
     }
 
+    public void OnSlotEntered(UIInventorySlot slot)
+    {
+        slotHovered = slot;
+    }
+
+    public void OnSlotExited(UIInventorySlot slot)
+    {
+        slotHovered = null;
+    }
+
     public void OnSlotPressed(UIInventorySlot slot)
     {
-        
+        slotPressed = slot;
+        UpdateDragSlot();
     }
 
     public void OnSlotReleased(UIInventorySlot slot)
     {
-        willClearDrag = true;
-    }
-    
-    public void OnSlotDragged(UIInventorySlot slot)
-    {
-        if (Inventory.instance.GetItemStack(slot.x, slot.y).amount > 0)
+        if (slotHovered && slotHovered != slot)
         {
-            slotDragged = slot;
-            UpdateDragSlot();
+            Inventory.instance.MergeOrSwapItemStacks(slotPressed.x, slotPressed.y, slotHovered.x, slotHovered.y);
         }
+
+        willClearPressed = true;
+        UpdateDragSlot();
     }
 
-    public void OnSlotDropped(UIInventorySlot slot)
+    public void OnSlotRightPressed(UIInventorySlot slot)
     {
-        if (slotDragged)
-        {
-            if (slotDragged != slot)
-            {
-                Inventory.instance.MergeOrSwapItemStacks(slotDragged.x, slotDragged.y, slot.x, slot.y);
-            }
-            slotDragged = null;
-            UpdateDragSlot();
-        }
+
+    }
+
+    public void OnSlotRightReleased(UIInventorySlot slot)
+    {
+        
     }
 
     public void OnOutsideDropped()
     {
-        if (slotDragged)
+        Debug.Log(slotPressed);
+        if (slotPressed)
         {
             // TODO: spawn items in world
 
-            Inventory.instance.ClearItemStack(slotDragged.x, slotDragged.y);
-            slotDragged = null;
+            Inventory.instance.ClearItemStack(slotPressed.x, slotPressed.y);
+            willClearPressed = true;
             UpdateDragSlot();
         }
     }
