@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private DataItem itemAmmo;
-    [SerializeField] private DataItem itemGreenCube;
-    [SerializeField] private DataItem itemYellowCube;
 
     private Health health;
+
+    [HideInInspector] public UnityEvent Died;
 
     private void Awake()
     {
@@ -19,16 +20,16 @@ public class Player : MonoBehaviour
     {
         health.Changed.AddListener(UpdateHealthUI);
         health.Depleted.AddListener(OnHealthDepleted);
-        Inventory.instance.Changed.AddListener(UpdateAmmoAndCubesUI);
+        Inventory.instance.Changed.AddListener(UpdateAmmoUI);
         UIGame.instance.SetHealth(health.GetHP(), health.GetHPMax());
 
         UpdateHealthUI();
-        UpdateAmmoAndCubesUI();
+        UpdateAmmoUI();
     }
 
     private void OnHealthDepleted()
     {
-        Game.instance.OnGameLose();
+        Died.Invoke();
     }
 
     private void UpdateHealthUI()
@@ -36,13 +37,8 @@ public class Player : MonoBehaviour
         UIGame.instance.SetHealth(health.GetHP(), health.GetHPMax());
     }
 
-    private void UpdateAmmoAndCubesUI()
+    private void UpdateAmmoUI()
     {
-        // ammo
         UIGame.instance.SetAmmo(Inventory.instance.GetItemCount(itemAmmo));
-
-        // cubes
-        int countCubes = Inventory.instance.GetItemCount(itemGreenCube) + Inventory.instance.GetItemCount(itemYellowCube);
-        UIGame.instance.SetCubesCurrent(countCubes);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class Enemy : MonoBehaviour
     private MeshFilter mf;
     private MeshRenderer mr;
     private Health health;
+
+    [HideInInspector] public UnityEvent Died;
 
     private void Awake()
     {
@@ -26,11 +29,6 @@ public class Enemy : MonoBehaviour
     {
         ApplyData();
         UpdateColorHealth();
-    }
-
-    public void SetActive(bool value)
-    {
-
     }
 
     private void ApplyData()
@@ -60,6 +58,7 @@ public class Enemy : MonoBehaviour
 
     private void OnHealthDepleted()
     {
+        Died.Invoke();
         Destroy(gameObject);
     }
 }

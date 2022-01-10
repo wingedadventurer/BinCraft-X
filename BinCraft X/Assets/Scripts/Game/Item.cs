@@ -72,7 +72,6 @@ public class Item : MonoBehaviour
 
     public void OnInteracted()
     {
-
         amount = Inventory.instance.AddItem(data, amount);
         if (amount == 0)
         {

@@ -13,9 +13,6 @@ public class Game : MonoBehaviour
     const string TEXT_MENU_WIN = "You are victorious!";
     const string TEXT_MENU_LOSE = "You died!";
 
-    [SerializeField] private DataItem dataGreenCube;
-    [SerializeField] private DataItem dataYellowCube;
-
     public GameObject canvas;
     public GameObject panelPause;
     public GameObject panelGame;
@@ -31,8 +28,6 @@ public class Game : MonoBehaviour
     private bool running = true;
 
     private Player player;
-
-    private int countCubesNeeded;
 
     private bool paused;
     public bool Paused
@@ -79,16 +74,6 @@ public class Game : MonoBehaviour
 
         Paused = false;
         playerControllable = true;
-
-        // get count of needed cubes
-        foreach (Item item in FindObjectsOfType<Item>())
-        {
-            if (item.data == dataGreenCube || item.data == dataYellowCube)
-            {
-                countCubesNeeded++;
-            }
-        }
-        UIGame.instance.SetCubesNeeded(countCubesNeeded);
     }
 
     private void Update()
