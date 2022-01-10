@@ -32,7 +32,7 @@ public class Item : MonoBehaviour
         ApplyData();
     }
 
-    private void ApplyData()
+    public void ApplyData()
     {
         if (data)
         {

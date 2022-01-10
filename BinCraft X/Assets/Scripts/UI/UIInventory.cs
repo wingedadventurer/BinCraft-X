@@ -131,13 +131,17 @@ public class UIInventory : MonoBehaviour
 
     public void OnSlotPressed(UIInventorySlot slot)
     {
-        slotPressed = slot;
-        UpdateDragSlot();
+        ItemStack stack = Inventory.instance.GetItemStack(slot.x, slot.y);
+        if (stack.data)
+        {
+            slotPressed = slot;
+            UpdateDragSlot();
+        }
     }
 
     public void OnSlotReleased(UIInventorySlot slot)
     {
-        if (slotHovered && slotHovered != slot)
+        if (slotPressed && slotHovered && slotHovered != slot)
         {
             Inventory.instance.MergeOrSwapItemStacks(slotPressed.x, slotPressed.y, slotHovered.x, slotHovered.y);
         }
@@ -158,10 +162,10 @@ public class UIInventory : MonoBehaviour
 
     public void OnOutsideDropped()
     {
-        Debug.Log(slotPressed);
         if (slotPressed)
         {
-            // TODO: spawn items in world
+            ItemStack stack = Inventory.instance.GetItemStack(slotPressed.x, slotPressed.y);
+            Game.instance.SpawnItem(stack.data, stack.amount);
 
             Inventory.instance.ClearItemStack(slotPressed.x, slotPressed.y);
             willClearPressed = true;
