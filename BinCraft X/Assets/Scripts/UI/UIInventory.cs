@@ -7,6 +7,8 @@ public class UIInventory : MonoBehaviour
 {
     public static UIInventory instance;
 
+    public GameObject panel;
+
     [SerializeField] private GameObject prefabInventorySlot;
     [SerializeField] private GameObject containerInventorySlot;
     [SerializeField] private GridLayoutGroup containerGridLayoutGroup;
@@ -27,15 +29,12 @@ public class UIInventory : MonoBehaviour
     private void Awake()
     {
         instance = this;
-    }
 
-    private void Start()
-    {
+        Inventory.instance.Changed.AddListener(UpdateSlots);
+
         AddSlots();
         UpdateSlots();
         UpdateDragSlot();
-
-        Inventory.instance.Changed.AddListener(UpdateSlots);
     }
 
     private void Update()
@@ -56,6 +55,21 @@ public class UIInventory : MonoBehaviour
             shiftDragged = false;
             UpdateDragSlot();
         }
+    }
+
+    public void SetPanelVisible(bool value)
+    {
+        panel.SetActive(value);
+        if (value)
+        {
+            UpdateSlots();
+            UpdateDragSlot();
+        }
+    }
+
+    public bool GetPanelVisible()
+    {
+        return panel.activeSelf;
     }
 
     public void AddSlots()

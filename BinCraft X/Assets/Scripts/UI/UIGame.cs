@@ -7,6 +7,8 @@ public class UIGame : MonoBehaviour
 {
     public static UIGame instance;
 
+    [SerializeField] private GameObject panel;
+
     [SerializeField] private Text textInteractPrompt;
     [SerializeField] private Slider sliderHP;
     [SerializeField] private Text textAmmo;
@@ -26,6 +28,11 @@ public class UIGame : MonoBehaviour
         SetCubesNeeded(1);
     }
     
+    public void SetPanelVisible(bool value)
+    {
+        panel.SetActive(value);
+    }
+
     public void SetInteractPrompt(string text)
     {
         textInteractPrompt.text = text;

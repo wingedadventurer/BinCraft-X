@@ -15,9 +15,7 @@ public class Game : MonoBehaviour
 
     public GameObject canvas;
     public GameObject panelPause;
-    public GameObject panelGame;
-    public GameObject panelInventory;
-    public Text textPause;
+    public Text textMenu;
 
     public bool playerControllable;
 
@@ -36,7 +34,7 @@ public class Game : MonoBehaviour
         {
             paused = value;
             panelPause.SetActive(paused);
-            panelGame.SetActive(!paused);
+            UIGame.instance.SetPanelVisible(!paused);
 
             FindObjectOfType<Movement>().enabled = !paused;
             FindObjectOfType<MouseLook>().enabled = !paused;
@@ -69,8 +67,8 @@ public class Game : MonoBehaviour
     {
         canvas.SetActive(true);
         panelPause.SetActive(false);
-        panelGame.SetActive(true);
-        panelInventory.SetActive(false);
+        UIGame.instance.SetPanelVisible(true);
+        UIInventory.instance.SetPanelVisible(false);
 
         Paused = false;
         playerControllable = true;
@@ -83,26 +81,26 @@ public class Game : MonoBehaviour
             // pause menu
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (panelInventory.activeSelf)
+                if (UIInventory.instance.GetPanelVisible())
                 {
-                    panelInventory.SetActive(false);
+                    UIInventory.instance.SetPanelVisible(false);
                     SetMouseLocked(true);
                     playerControllable = true;
                 }
                 else
                 {
                     Paused = !Paused;
-                    textPause.text = TEXT_MENU_PAUSED;
+                    textMenu.text = TEXT_MENU_PAUSED;
                 }
             }
 
             // inventory
             if (Input.GetKeyDown(KeyCode.Tab) && !paused)
             {
-                bool inventoryVisible = !panelInventory.activeSelf;
-                panelInventory.SetActive(inventoryVisible);
-                SetMouseLocked(!inventoryVisible);
-                playerControllable = !inventoryVisible;
+                bool inventoryVisible = UIInventory.instance.GetPanelVisible();
+                UIInventory.instance.SetPanelVisible(!inventoryVisible);
+                SetMouseLocked(inventoryVisible);
+                playerControllable = inventoryVisible;
             }
 
             // DEBUG: test game win and lose
@@ -128,14 +126,14 @@ public class Game : MonoBehaviour
     {
         running = false;
         Paused = true;
-        textPause.text = TEXT_MENU_WIN;
+        textMenu.text = TEXT_MENU_WIN;
     }
 
     public void OnGameLose()
     {
         running = false;
         Paused = true;
-        textPause.text = TEXT_MENU_LOSE;
+        textMenu.text = TEXT_MENU_LOSE;
     }
 
     public void SpawnItem(DataItem data, int amount)

@@ -742,9 +742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1593465923}
   panelPause: {fileID: 446665085}
-  panelGame: {fileID: 36508315}
-  panelInventory: {fileID: 1282827998}
-  textPause: {fileID: 1639689925}
+  textMenu: {fileID: 1639689925}
   playerControllable: 0
   goItems: {fileID: 191839591}
   prefabItem: {fileID: 169948983582022770, guid: 5ac39c07822cc87438d89069f84ac62b, type: 3}
@@ -4710,6 +4708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ba80f4c9c35a764ba892a95f63a55b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 36508315}
   textInteractPrompt: {fileID: 1083847531}
   sliderHP: {fileID: 127617717}
   textAmmo: {fileID: 351346080}
@@ -5604,6 +5603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ba3acac976b3d44baa85f0caeb6a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 1282827998}
   prefabInventorySlot: {fileID: 9110132105006713679, guid: c30167d5cc9253f4fb7cb728e6e1f575, type: 3}
   containerInventorySlot: {fileID: 1181548417}
   containerGridLayoutGroup: {fileID: 1181548421}

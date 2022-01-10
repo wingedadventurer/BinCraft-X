@@ -20,7 +20,7 @@ public class UIInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExit
     [HideInInspector] public UnityEvent RightPressed;
     [HideInInspector] public UnityEvent RightReleased;
 
-    private void Start()
+    private void Awake()
     {
         SetSprite(null);
         SetAmount(0);
