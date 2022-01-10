@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Item : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class Item : MonoBehaviour
     private MeshCollider mc;
     private Health health;
     private Interactable interactable;
+
+    bool picked;
+    private Vector3 posPickStart;
+    private Transform transformPickEnd;
+    private float fPick = 0.0f;
 
     private void Awake()
     {
@@ -27,9 +33,17 @@ public class Item : MonoBehaviour
         interactable.InteractEnter.AddListener(OnInteractEnter);
     }
 
-    void Start()
+    private void Start()
     {
         ApplyData();
+    }
+
+    private void Update()
+    {
+        if (picked)
+        {
+            transform.position = Vector3.Lerp(posPickStart, transformPickEnd.position, fPick);
+        }
     }
 
     public void ApplyData()
@@ -58,11 +72,23 @@ public class Item : MonoBehaviour
 
     public void OnInteracted()
     {
+
         amount = Inventory.instance.AddItem(data, amount);
         if (amount == 0)
         {
             UIGame.instance.SetInteractPrompt("");
-            Destroy(gameObject);
+
+            GetComponent<Rigidbody>().isKinematic = true;
+            mc.enabled = false;
+            health.enabled = false;
+            interactable.enabled = false;
+
+            posPickStart = transform.position;
+            transformPickEnd = FindObjectOfType<Player>().transform;
+
+            DOTween.To(() => fPick, x => fPick = x, 1.0f, 0.15f).SetEase(Ease.InCubic).OnComplete(OnPickTweenComplete);
+
+            picked = true;
         }
         else
         {
@@ -83,5 +109,10 @@ public class Item : MonoBehaviour
             s += " (" + amount + ")";
         }
         UIGame.instance.SetInteractPrompt(s);
+    }
+
+    private void OnPickTweenComplete()
+    {
+        Destroy(gameObject);
     }
 }
