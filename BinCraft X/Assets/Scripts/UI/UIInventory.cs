@@ -10,10 +10,10 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private GameObject prefabInventorySlot;
     [SerializeField] private GameObject containerInventorySlot;
     [SerializeField] private GridLayoutGroup containerGridLayoutGroup;
-    [SerializeField] private UIInventorySlot slotMouse;
-    [SerializeField] private RectTransform rectTransformSlotMouse;
+    [SerializeField] private RectTransform rectTransformSlotHand;
 
     private UIInventorySlot[,] slots;
+    [SerializeField] private UIInventorySlot slotHand;
 
     private void Awake()
     {
@@ -31,11 +31,11 @@ public class UIInventory : MonoBehaviour
     private void Update()
     {
         // move mouse slot to mouse + add offset
-        rectTransformSlotMouse.position = Input.mousePosition;
+        rectTransformSlotHand.position = Input.mousePosition;
         // move to bottom-right
-        rectTransformSlotMouse.position += new Vector3(rectTransformSlotMouse.rect.size.x, -rectTransformSlotMouse.rect.size.y, 0) * 0.5f;
+        rectTransformSlotHand.position += new Vector3(rectTransformSlotHand.rect.size.x, -rectTransformSlotHand.rect.size.y, 0) * 0.5f;
         // apply offset
-        rectTransformSlotMouse.position += new Vector3(40, 0, 0);
+        rectTransformSlotHand.position += new Vector3(40, 0, 0);
     }
 
     public void AddSlots()
@@ -46,15 +46,19 @@ public class UIInventory : MonoBehaviour
         containerGridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         containerGridLayoutGroup.constraintCount = inventory.width;
 
-        for (int x = 0; x < inventory.width; x++)
+        for (int y = 0; y < inventory.height; y++)
         {
-            for (int y = 0; y < inventory.height; y++)
+            for (int x = 0; x < inventory.width; x++)
             {
                 GameObject goSlot = Instantiate(prefabInventorySlot, containerInventorySlot.transform);
                 UIInventorySlot slot = goSlot.GetComponent<UIInventorySlot>();
                 slots[x, y] = slot;
                 slot.x = x;
                 slot.y = y;
+                //slot.gameObject.GetComponent<Button>().onClick.AddListener(delegate { OnSlotPressed(slot); });
+                slot.Pressed.AddListener(delegate { OnSlotPressed(slot); } );
+                slot.Released.AddListener(delegate { OnSlotReleased(slot); } );
+                slot.Dropped.AddListener(delegate { OnSlotDropped(slot); } );
             }
         }
     }
@@ -72,5 +76,32 @@ public class UIInventory : MonoBehaviour
                 slot.SetAmount(itemStack.amount);
             }
         }
+
+        // hand slot
+        //ItemStack itemStackHand = inventory.GetHand();
+        //slotHand.gameObject.SetActive(itemStackHand.data); // hide if hand is empty
+        //slotHand.SetSprite(itemStackHand.data ? itemStackHand.data.spriteInventory : null);
+        //slotHand.SetAmount(itemStackHand.amount);
+    }
+
+    public void OnSlotPressed(UIInventorySlot slot)
+    {
+        Debug.Log("pressed slot " + slot.x + " " + slot.y);
+
+        // TODO: do stuff
+    }
+
+    public void OnSlotReleased(UIInventorySlot slot)
+    {
+        Debug.Log("released slot " + slot.x + " " + slot.y);
+
+        // TODO: do stuff
+    }
+
+    public void OnSlotDropped(UIInventorySlot slot)
+    {
+        Debug.Log("dropped slot " + slot.x + " " + slot.y);
+
+        // TODO: do stuff
     }
 }

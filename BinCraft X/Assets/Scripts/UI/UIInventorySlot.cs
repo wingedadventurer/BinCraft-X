@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UIInventorySlot : MonoBehaviour
 {
+    public UnityEvent Pressed, Released, Dropped;
+
     [HideInInspector] public int x;
     [HideInInspector] public int y;
 
@@ -27,7 +30,28 @@ public class UIInventorySlot : MonoBehaviour
 
     public void SetAmount(int amount)
     {
-
         text.text = amount > 0 ? amount.ToString() : "";
+    }
+
+    public void SetPressed(bool value)
+    {
+        if (value)
+        {
+            Pressed.Invoke();
+        }
+        else
+        {
+            Released.Invoke();
+        }
+    }
+
+    public void Drag()
+    {
+
+    }
+
+    public void Drop()
+    {
+        Dropped.Invoke();
     }
 }

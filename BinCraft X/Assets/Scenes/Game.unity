@@ -5455,8 +5455,8 @@ MonoBehaviour:
   prefabInventorySlot: {fileID: 9110132105006713679, guid: c30167d5cc9253f4fb7cb728e6e1f575, type: 3}
   containerInventorySlot: {fileID: 1181548417}
   containerGridLayoutGroup: {fileID: 1181548421}
-  slotMouse: {fileID: 627413331}
-  rectTransformSlotMouse: {fileID: 627413330}
+  rectTransformSlotHand: {fileID: 627413330}
+  slotHand: {fileID: 627413331}
 --- !u!1 &1593465923
 GameObject:
   m_ObjectHideFlags: 0
@@ -6657,7 +6657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9110132105006713679, guid: c30167d5cc9253f4fb7cb728e6e1f575, type: 3}
       propertyPath: m_Name
-      value: MouseSlot
+      value: HandSlot
       objectReference: {fileID: 0}
     - target: {fileID: 9110132105006714032, guid: c30167d5cc9253f4fb7cb728e6e1f575, type: 3}
       propertyPath: m_RaycastTarget
