@@ -22,6 +22,8 @@ public class UIInventory : MonoBehaviour
 
     private bool willClearDragged;
 
+    private bool shiftDragged;
+
     private void Awake()
     {
         instance = this;
@@ -51,6 +53,7 @@ public class UIInventory : MonoBehaviour
             slotHovered = null;
             slotDragged = null;
             itemStackDrag.data = null;
+            shiftDragged = false;
             UpdateDragSlot();
         }
     }
@@ -150,19 +153,23 @@ public class UIInventory : MonoBehaviour
         ItemStack stack = Inventory.instance.GetItemStack(slot.x, slot.y);
         if (stack.data)
         {
-            slotDragged = slot;
-            itemStackDrag = stack;
+            // shift drag -> split
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                slotDragged = slot;
+                itemStackDrag = stack;
+                shiftDragged = true;
 
-            itemStackDrag.amount = itemStackDrag.amount / 2 + (itemStackDrag.amount % 2);
-            UpdateDragSlot();
+                itemStackDrag.amount = itemStackDrag.amount / 2 + (itemStackDrag.amount % 2);
+                UpdateDragSlot();
+            }
         }
     }
 
     public void OnSlotRightReleased(UIInventorySlot slot)
     {
-        Debug.Log("x");
-
-        if (slotDragged && slotHovered && slotHovered != slot)
+        // RMB + Shift
+        if (slotDragged && slotHovered && slotHovered != slot && shiftDragged)
         {
             Inventory.instance.SplitStack(slotDragged.x, slotDragged.y, slotHovered.x, slotHovered.y);
         }
