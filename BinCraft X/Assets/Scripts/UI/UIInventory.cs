@@ -15,8 +15,9 @@ public class UIInventory : MonoBehaviour
     private UIInventorySlot[,] slots;
     [SerializeField] private UIInventorySlot slotHand;
     
-    public UIInventorySlot slotDragged;
-    private bool dragged;
+    private UIInventorySlot slotDragged;
+
+    private bool willClearDrag;
 
     private void Awake()
     {
@@ -40,6 +41,13 @@ public class UIInventory : MonoBehaviour
         rectTransformSlotHand.position += new Vector3(rectTransformSlotHand.rect.size.x, -rectTransformSlotHand.rect.size.y, 0) * 0.5f;
         // apply offset
         rectTransformSlotHand.position += new Vector3(40, 0, 0);
+
+        if (willClearDrag)
+        {
+            willClearDrag = false;
+            slotDragged = null;
+            UpdateDragSlot();
+        }
     }
 
     public void AddSlots()
@@ -101,51 +109,45 @@ public class UIInventory : MonoBehaviour
 
     public void OnSlotPressed(UIInventorySlot slot)
     {
-        return;
-
-        slotDragged = slot;
-        UpdateDragSlot();
-
-        Debug.Log("pressed slot " + slot.x + " " + slot.y);
+        
     }
 
     public void OnSlotReleased(UIInventorySlot slot)
     {
-        if (!dragged)
-        {
-            if (slotDragged)
-            {
-                slotDragged = null;
-                UpdateDragSlot();
-            }
-        }
-
-        Debug.Log("released slot " + slot.x + " " + slot.y);
+        willClearDrag = true;
     }
-
+    
     public void OnSlotDragged(UIInventorySlot slot)
     {
-        dragged = true;
-
-        slotDragged = slot;
-        UpdateDragSlot();
-
-        //Debug.Log("dragged slot " + slot.x + " " + slot.y);
+        if (Inventory.instance.GetItemStack(slot.x, slot.y).amount > 0)
+        {
+            slotDragged = slot;
+            UpdateDragSlot();
+        }
     }
 
     public void OnSlotDropped(UIInventorySlot slot)
     {
-        if (dragged && slotDragged)
+        if (slotDragged)
         {
             if (slotDragged != slot)
             {
-                Inventory.instance.SwapItemStacks(slotDragged.x, slotDragged.y, slot.x, slot.y);
+                Inventory.instance.MergeOrSwapItemStacks(slotDragged.x, slotDragged.y, slot.x, slot.y);
             }
             slotDragged = null;
-            dragged = false;
             UpdateDragSlot();
         }
+    }
 
-        Debug.Log("dropped slot " + slot.x + " " + slot.y);
+    public void OnOutsideDropped()
+    {
+        if (slotDragged)
+        {
+            // TODO: spawn items in world
+
+            Inventory.instance.ClearItemStack(slotDragged.x, slotDragged.y);
+            slotDragged = null;
+            UpdateDragSlot();
+        }
     }
 }

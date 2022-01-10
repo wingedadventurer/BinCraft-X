@@ -180,11 +180,63 @@ public class Inventory : MonoBehaviour
         return grid[x, y];
     }
 
+    public void ClearItemStack(int x, int y)
+    {
+        grid[x, y].data = null;
+        grid[x, y].amount = 0;
+        Changed.Invoke();
+    }
+
     public void SwapItemStacks(int xFrom, int yFrom, int xTo, int yTo)
     {
         ItemStack temp = grid[xTo, yTo];
         grid[xTo, yTo] = grid[xFrom, yFrom];
         grid[xFrom, yFrom] = temp;
         Changed.Invoke();
+    }
+
+    public void MergeOrSwapItemStacks(int xFrom, int yFrom, int xTo, int yTo)
+    {
+        ref ItemStack from = ref grid[xFrom, yFrom];
+        ref ItemStack to = ref grid[xTo, yTo];
+
+        // if from is empty, abort
+        if (!from.data)
+        {
+            return;
+        }
+
+        // if to is empty, swap
+        if (!to.data)
+        {
+            SwapItemStacks(xFrom, yFrom, xTo, yTo);
+            return;
+        }
+
+        // if same datas, merge, otherwise swap
+        if (from.data == to.data)
+        {
+            // merge stacks
+
+            int maxStackCount = from.data.maxStackCount;
+            int available = maxStackCount - to.amount;
+            if (from.amount > available)
+            {
+                to.amount = maxStackCount;
+                from.amount -= available;
+            }
+            else
+            {
+                to.amount += from.amount;
+                from.amount = 0;
+                from.data = null;
+            }
+            Changed.Invoke();
+        }
+        else
+        {
+            // swap stacks
+            SwapItemStacks(xFrom, yFrom, xTo, yTo);
+        }
     }
 }
