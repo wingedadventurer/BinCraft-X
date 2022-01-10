@@ -239,4 +239,40 @@ public class Inventory : MonoBehaviour
             SwapItemStacks(xFrom, yFrom, xTo, yTo);
         }
     }
+
+    public void SplitStack(int xFrom, int yFrom, int xTo, int yTo)
+    {
+        ref ItemStack from = ref grid[xFrom, yFrom];
+        ref ItemStack to = ref grid[xTo, yTo];
+
+        // skip splitting from empty stack
+        if (!from.data) { return; }
+        if (from.amount == 0) { return; }
+
+        // skip splitting to stack of different item
+        if (to.data && from.data != to.data) { return; }
+
+        // if target stack is empty, make it of same type
+        if (!to.data) { to.data = from.data; }
+
+        int amount = from.amount / 2 + from.amount % 2;
+        int free = to.data.maxStackCount - to.amount;
+
+        if (amount > free)
+        {
+            to.amount = to.data.maxStackCount;
+            from.amount -= free;
+        }
+        else
+        {
+            to.amount += amount;
+            from.amount -= amount;
+            if (from.amount == 0)
+            {
+                from.data = null;
+            }
+        }
+
+        Changed.Invoke();
+    }
 }
