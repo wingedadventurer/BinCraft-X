@@ -150,6 +150,7 @@ public class UIInventory : MonoBehaviour
         ItemStack stack = inventory.GetItemStack(slot.x, slot.y);
         if (stack.data)
         {
+            // drag -> whole stack
             slotDragged = slot;
             inventory.SetDragStack(stack.data, stack.amount);
             inventory.ClearItemStack(slot.x, slot.y);
@@ -202,25 +203,14 @@ public class UIInventory : MonoBehaviour
         }
         willClearDragged = true;
     }
-    //{
-    //    // RMB + Shift
-    //    if (slotDragged && slotHovered && shiftDragged)
-    //    {
-    //        inventory.SplitStack(slotDragged.x, slotDragged.y, slotHovered.x, slotHovered.y);
-    //    }
-
-    //    willClearDragged = true;
-    //}
 
     public void OnOutsideDropped()
     {
         if (slotDragged)
         {
             ItemStack stack = inventory.GetDragStack();
-            Debug.Log(stack.data);
             Game.instance.SpawnItem(stack.data, stack.amount);
             inventory.ClearDragStack();
-            inventory.ClearItemStack(slotDragged.x, slotDragged.y);
             willClearDragged = true;
         }
     }

@@ -43,13 +43,11 @@ public class UIInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void OnPointerEnter(PointerEventData eventData)
     {
         Entered.Invoke();
-        //Debug.Log(x + " " + y + " " + "enter");
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         Exited.Invoke();
-        //Debug.Log(x + " " + y + " " + "exit");
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -62,7 +60,6 @@ public class UIInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             RightPressed.Invoke();
         }
-        //Debug.Log(x + " " + y + " " + "down with " + eventData.button);
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -75,7 +72,6 @@ public class UIInventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExit
         {
             RightReleased.Invoke();
         }
-        //Debug.Log(x + " " + y + " " + "up with " + eventData.button);
     }
     #endregion
 }
