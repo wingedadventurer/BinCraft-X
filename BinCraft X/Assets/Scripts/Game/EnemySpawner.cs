@@ -13,6 +13,8 @@ public class EnemySpawner : MonoBehaviour
     public float patrolDurationWait;
     public float periodSpawn;
 
+    public Enemy lastSpawnedEnemy;
+
     [HideInInspector] public UnityEvent Spawned;
 
     private float t;
@@ -38,6 +40,8 @@ public class EnemySpawner : MonoBehaviour
         patroling.StartPatroling();
 
         enemy.Died.AddListener(StartTimer);
+
+        lastSpawnedEnemy = enemy;
 
         Spawned.Invoke();
     }

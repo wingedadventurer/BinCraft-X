@@ -9,7 +9,7 @@ public class WinChecker : MonoBehaviour
 
     private int countCubesCurrent;
     private int countCubesNeeded;
-    private int countEnemies;
+    public int countEnemies;
 
     // Start is called before the first frame update
     void Start()
@@ -23,10 +23,17 @@ public class WinChecker : MonoBehaviour
             }
         }
 
+        // hook up enemy deaths
         foreach (Enemy enemy in FindObjectsOfType<Enemy>())
         {
             enemy.Died.AddListener(OnEnemyDied);
             countEnemies++;
+        }
+
+        // hook up enemy spawner spawns
+        foreach (EnemySpawner enemySpawner in FindObjectsOfType<EnemySpawner>())
+        {
+            enemySpawner.Spawned.AddListener(delegate { OnEnemySpawnerSpawned(enemySpawner); });
         }
 
         FindObjectOfType<Player>().Died.AddListener(OnPlayerDied);
@@ -55,6 +62,12 @@ public class WinChecker : MonoBehaviour
     private void OnPlayerDied()
     {
         Game.instance.OnGameLose();
+    }
+
+    private void OnEnemySpawnerSpawned(EnemySpawner enemySpawner)
+    {
+        enemySpawner.lastSpawnedEnemy.Died.AddListener(OnEnemyDied);
+        countEnemies++;
     }
 
     private void CheckForWin()
