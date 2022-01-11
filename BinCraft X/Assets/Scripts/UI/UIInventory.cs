@@ -20,7 +20,7 @@ public class UIInventory : MonoBehaviour
     private UIInventorySlot slotHovered;
     private UIInventorySlot slotDragged;
 
-    private ItemStack itemStackDrag;
+    private Inventory inventory;
 
     private bool willClearDragged;
 
@@ -29,8 +29,10 @@ public class UIInventory : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        inventory = Inventory.instance;
 
-        Inventory.instance.Changed.AddListener(UpdateSlots);
+        inventory.Changed.AddListener(UpdateSlots);
+        inventory.DragStackChanged.AddListener(UpdateDragSlot);
 
         AddSlots();
         UpdateSlots();
@@ -51,20 +53,15 @@ public class UIInventory : MonoBehaviour
             willClearDragged = false;
             slotHovered = null;
             slotDragged = null;
-            itemStackDrag.data = null;
+            inventory.SetDragStack(null, 0);
+            inventory.ClearDragStack();
             shiftDragged = false;
-            UpdateDragSlot();
         }
     }
 
     public void SetPanelVisible(bool value)
     {
         panel.SetActive(value);
-        if (value)
-        {
-            UpdateSlots();
-            UpdateDragSlot();
-        }
     }
 
     public bool GetPanelVisible()
@@ -74,7 +71,6 @@ public class UIInventory : MonoBehaviour
 
     public void AddSlots()
     {
-        Inventory inventory = Inventory.instance;
         slots = new UIInventorySlot[inventory.width, inventory.height];
 
         containerGridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
@@ -102,7 +98,6 @@ public class UIInventory : MonoBehaviour
 
     public void UpdateSlots()
     {
-        Inventory inventory = Inventory.instance;
         for (int x = 0; x < inventory.width; x++)
         {
             for (int y = 0; y < inventory.height; y++)
@@ -117,12 +112,12 @@ public class UIInventory : MonoBehaviour
 
     public void UpdateDragSlot()
     {
-        Inventory inventory = Inventory.instance;
-        if (itemStackDrag.data)
+        ItemStack dragStack = inventory.GetDragStack();
+        if (dragStack.data)
         {
             slotDrag.gameObject.SetActive(true);
-            slotDrag.SetSprite(itemStackDrag.data.spriteInventory);
-            slotDrag.SetAmount(itemStackDrag.amount);
+            slotDrag.SetSprite(dragStack.data.spriteInventory);
+            slotDrag.SetAmount(dragStack.amount);
         }
         else
         {
@@ -142,66 +137,81 @@ public class UIInventory : MonoBehaviour
 
     public void OnSlotPressed(UIInventorySlot slot)
     {
-        ItemStack stack = Inventory.instance.GetItemStack(slot.x, slot.y);
+        ItemStack stack = inventory.GetItemStack(slot.x, slot.y);
         if (stack.data)
         {
             slotDragged = slot;
-            itemStackDrag = stack;
-            UpdateDragSlot();
+            inventory.SetDragStack(stack.data, stack.amount);
+            inventory.ClearItemStack(slot.x, slot.y);
         }
     }
 
     public void OnSlotReleased(UIInventorySlot slot)
     {
-        if (slotDragged && slotHovered && slotHovered != slot)
+        if (slotDragged && slotHovered)
         {
-            Inventory.instance.MergeOrSwapItemStacks(slotDragged.x, slotDragged.y, slotHovered.x, slotHovered.y);
+            inventory.MergeOrSwapDragStack(slotDragged.x, slotDragged.y, slotHovered.x, slotHovered.y);
         }
-
         willClearDragged = true;
-        UpdateDragSlot();
     }
 
     public void OnSlotRightPressed(UIInventorySlot slot)
     {
-        ItemStack stack = Inventory.instance.GetItemStack(slot.x, slot.y);
+        ItemStack stack = inventory.GetItemStack(slot.x, slot.y);
         if (stack.data)
         {
-            // shift drag -> split
             if (Input.GetKey(KeyCode.LeftShift))
             {
+                // shift drag -> split
                 slotDragged = slot;
-                itemStackDrag = stack;
+                int splitAmount = stack.amount / 2 + stack.amount % 2;
+                inventory.SetStack(slot.x, slot.y, stack.data, stack.amount - splitAmount);
+                inventory.SetDragStack(stack.data, splitAmount);
                 shiftDragged = true;
-
-                itemStackDrag.amount = itemStackDrag.amount / 2 + (itemStackDrag.amount % 2);
-                UpdateDragSlot();
+            }
+            else
+            {
+                // normal drag -> 1
+                slotDragged = slot;
+                int splitAmount = 1;
+                inventory.SetStack(slot.x, slot.y, stack.data, stack.amount - splitAmount);
+                inventory.SetDragStack(stack.data, splitAmount);
+                shiftDragged = true;
             }
         }
     }
 
     public void OnSlotRightReleased(UIInventorySlot slot)
     {
-        // RMB + Shift
-        if (slotDragged && slotHovered && slotHovered != slot && shiftDragged)
+        if (slotDragged && slotHovered)
         {
-            Inventory.instance.SplitStack(slotDragged.x, slotDragged.y, slotHovered.x, slotHovered.y);
+            if (shiftDragged)
+            {
+                inventory.MergeOrSwapDragStack(slotDragged.x, slotDragged.y, slotHovered.x, slotHovered.y);
+            }
         }
-
         willClearDragged = true;
-        UpdateDragSlot();
     }
+    //{
+    //    // RMB + Shift
+    //    if (slotDragged && slotHovered && shiftDragged)
+    //    {
+    //        inventory.SplitStack(slotDragged.x, slotDragged.y, slotHovered.x, slotHovered.y);
+    //    }
+
+    //    willClearDragged = true;
+    //}
 
     public void OnOutsideDropped()
     {
         if (slotDragged)
         {
-            ItemStack stack = Inventory.instance.GetItemStack(slotDragged.x, slotDragged.y);
+            ItemStack stack = inventory.GetDragStack();
+            Debug.Log(stack.data);
             Game.instance.SpawnItem(stack.data, stack.amount);
-
-            Inventory.instance.ClearItemStack(slotDragged.x, slotDragged.y);
+            inventory.ClearDragStack();
+            inventory.ClearItemStack(slotDragged.x, slotDragged.y);
             willClearDragged = true;
-            UpdateDragSlot();
         }
     }
 }

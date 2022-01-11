@@ -13,12 +13,15 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory instance;
 
-    public UnityEvent Changed;
-
     public int width;
     public int height;
 
     private ItemStack[,] grid;
+
+    private ItemStack dragStack;
+
+    [HideInInspector] public UnityEvent Changed;
+    [HideInInspector] public UnityEvent DragStackChanged;
 
     private void Awake()
     {
@@ -187,6 +190,40 @@ public class Inventory : MonoBehaviour
         Changed.Invoke();
     }
 
+    public void SetStack(int x, int y, DataItem data, int amount)
+    {
+        if (!data || amount == 0)
+        {
+            grid[x, y].data = null;
+            grid[x, y].amount = 0;
+        }
+        else
+        {
+            grid[x, y].data = data;
+            grid[x, y].amount = amount;
+        }
+
+        Changed.Invoke();
+    }
+
+    public void SetDragStack(DataItem data, int amount)
+    {
+        dragStack.data = data;
+        dragStack.amount = amount;
+        DragStackChanged.Invoke();
+    }
+
+    public ItemStack GetDragStack()
+    {
+        return dragStack;
+    }
+
+    public void ClearDragStack()
+    {
+        dragStack.data = null;
+        dragStack.amount = 0;
+    }
+
     public void SwapItemStacks(int xFrom, int yFrom, int xTo, int yTo)
     {
         ItemStack temp = grid[xTo, yTo];
@@ -195,48 +232,68 @@ public class Inventory : MonoBehaviour
         Changed.Invoke();
     }
 
-    public void MergeOrSwapItemStacks(int xFrom, int yFrom, int xTo, int yTo)
+    public void MergeOrSwapDragStack(int xFrom, int yFrom, int xTo, int yTo)
     {
+        // if drag is empty, abort
+        if (!dragStack.data)
+        {
+            return;
+        }
+
         ref ItemStack from = ref grid[xFrom, yFrom];
         ref ItemStack to = ref grid[xTo, yTo];
 
-        // if from is empty, abort
-        if (!from.data)
-        {
-            return;
-        }
-
-        // if to is empty, swap
+        // if to is empty, drop
         if (!to.data)
         {
-            SwapItemStacks(xFrom, yFrom, xTo, yTo);
+            to.data = dragStack.data;
+            to.amount = dragStack.amount;
+            dragStack.data = null;
+            Changed.Invoke();
+            DragStackChanged.Invoke();
             return;
         }
 
-        // if same datas, merge, otherwise swap
-        if (from.data == to.data)
-        {
-            // merge stacks
+        // if from is empty, merge
 
-            int maxStackCount = from.data.maxStackCount;
-            int available = maxStackCount - to.amount;
-            if (from.amount > available)
+        // if same datas, merge
+        if (dragStack.data == to.data)
+        {
+            int maxStackCount = to.data.maxStackCount;
+            int available = maxStackCount - dragStack.amount;
+            if (dragStack.amount > available)
             {
+                // excess, return some to previous stack
                 to.amount = maxStackCount;
-                from.amount -= available;
+                dragStack.amount -= available;
+                from.data = dragStack.data;
+                from.amount += dragStack.amount;
             }
             else
             {
-                to.amount += from.amount;
-                from.amount = 0;
-                from.data = null;
+                // empty the drag stack
+                to.amount += dragStack.amount;
             }
+            ClearDragStack();
             Changed.Invoke();
         }
+        // otherwise, if split return to original
+        else if (from.data == dragStack.data)
+        {
+            from.amount += dragStack.amount;
+            ClearDragStack();
+            Changed.Invoke();
+        }
+        // otherwise, swap
         else
         {
-            // swap stacks
-            SwapItemStacks(xFrom, yFrom, xTo, yTo);
+            from.data = to.data;
+            from.amount = to.amount;
+            to.data = dragStack.data;
+            to.amount = dragStack.amount;
+
+            ClearDragStack();
+            Changed.Invoke();
         }
     }
 
