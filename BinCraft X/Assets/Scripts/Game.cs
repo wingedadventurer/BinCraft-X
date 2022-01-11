@@ -145,7 +145,7 @@ public class Game : MonoBehaviour
         GameObject goItem = Instantiate(prefabItem, goItems.transform);
         goItem.transform.position = player.transform.position;
         Item item = goItem.GetComponent<Item>();
-        item.data = data;
+        item.Data = data;
         item.amount = amount;
         item.ApplyData();
     }

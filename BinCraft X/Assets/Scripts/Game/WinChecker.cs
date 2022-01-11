@@ -17,7 +17,7 @@ public class WinChecker : MonoBehaviour
         // get count of needed cubes
         foreach (Item item in FindObjectsOfType<Item>())
         {
-            if (item.data == dataGreenCube || item.data == dataYellowCube)
+            if (item.Data == dataGreenCube || item.Data == dataYellowCube)
             {
                 countCubesNeeded++;
             }

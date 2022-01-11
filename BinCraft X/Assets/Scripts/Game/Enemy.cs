@@ -3,9 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[ExecuteInEditMode]
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private DataEnemy data;
+    public DataEnemy Data
+    {
+        set
+        {
+            data = value;
+            ApplyData();
+        }
+        get
+        {
+            return data;
+        }
+    }
 
     public Gradient gradientHealth;
 
@@ -19,36 +32,42 @@ public class Enemy : MonoBehaviour
     {
         mf = GetComponent<MeshFilter>();
         mr = GetComponent<MeshRenderer>();
-        health = GetComponent<Health>();
+        Data = data;
 
-        health.Changed.AddListener(OnHealthChanged);
-        health.Depleted.AddListener(OnHealthDepleted);
+        Debug.Log(gameObject.name);
+
+        if (Application.isPlaying)
+        {
+            health = GetComponent<Health>();
+            health.Changed.AddListener(OnHealthChanged);
+            health.Depleted.AddListener(OnHealthDepleted);
+        }
     }
 
     private void Start()
     {
-        ApplyData();
-        UpdateColorHealth();
-    }
-
-    public void SetData(DataEnemy d)
-    {
-        data = d;
-        ApplyData();
+        Data = data;
+        if (Application.isPlaying)
+        {
+            UpdateColorHealth();
+        }
     }
 
     private void ApplyData()
     {
         if (data)
         {
-            mf.mesh = data.mesh;
-            mr.material = data.material;
-            health.SetHPMax(data.hp, true);
+            if (mf) { mf.sharedMesh = data.mesh; }
+            if (mr) { mr.material = data.material; }
+            if (Application.isPlaying && health)
+            {
+                health.SetHPMax(data.hp, true);
+            }
         }
         else
         {
-            mf.mesh = null;
-            mr.material = null;
+            if (mf) { mf.sharedMesh = Resources.GetBuiltinResource<Mesh>("Cylinder.fbx"); }
+            if (mr) { mr.material = null; }
         }
     }
 
@@ -66,5 +85,10 @@ public class Enemy : MonoBehaviour
     {
         Died.Invoke();
         Destroy(gameObject);
+    }
+
+    private void OnValidate()
+    {
+        Data = data;
     }
 }

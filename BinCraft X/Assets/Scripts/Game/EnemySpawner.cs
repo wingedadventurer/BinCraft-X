@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
         goEnemy.transform.parent = transformParent;
 
         Enemy enemy = goEnemy.GetComponent<Enemy>();
-        enemy.SetData(data);
+        enemy.Data = data;
         Patroling patroling = enemy.GetComponent<Patroling>();
         patroling.points = patrolPoints;
         patroling.durationWait = patrolDurationWait;
