@@ -6,10 +6,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Patroling : MonoBehaviour
 {
-    [Header("0 for no patroling; 1 for moving to single point; 2 or more for patroling")]
+
     public List<Transform> points = new List<Transform>();
 
-    [Header("How long to wait at patrol point")]
     public float durationWait;
 
     private float tWait;
@@ -25,6 +24,17 @@ public class Patroling : MonoBehaviour
 
     private void Start()
     {
+        if (points.Count > 0)
+        {
+            patroling = true;
+            nma.destination = points[indexCurrentPoint].position;
+        }
+    }
+
+    public void StartPatroling()
+    {
+        
+        patroling = false;
         if (points.Count > 0)
         {
             patroling = true;

@@ -164,6 +164,9 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  Died:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4507709211546565998
 MonoBehaviour:
   m_ObjectHideFlags: 0

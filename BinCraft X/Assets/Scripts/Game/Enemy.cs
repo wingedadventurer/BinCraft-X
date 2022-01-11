@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
-    public DataEnemy data;
+    [SerializeField] private DataEnemy data;
 
     public Gradient gradientHealth;
 
@@ -29,6 +29,12 @@ public class Enemy : MonoBehaviour
     {
         ApplyData();
         UpdateColorHealth();
+    }
+
+    public void SetData(DataEnemy d)
+    {
+        data = d;
+        ApplyData();
     }
 
     private void ApplyData()
