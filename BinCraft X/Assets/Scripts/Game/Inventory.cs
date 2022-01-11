@@ -222,6 +222,8 @@ public class Inventory : MonoBehaviour
     {
         dragStack.data = null;
         dragStack.amount = 0;
+
+        DragStackChanged.Invoke();
     }
 
     public void SwapItemStacks(int xFrom, int yFrom, int xTo, int yTo)
@@ -281,6 +283,7 @@ public class Inventory : MonoBehaviour
         else if (from.data == dragStack.data)
         {
             from.amount += dragStack.amount;
+
             ClearDragStack();
             Changed.Invoke();
         }
@@ -330,6 +333,20 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        Changed.Invoke();
+    }
+
+    public void ReturnDragStack(int xTo, int yTo)
+    {
+        if (!dragStack.data) { return; }
+
+        ref ItemStack to = ref grid[xTo, yTo];
+        if (to.data && to.data != dragStack.data) { return; }
+
+        to.data = dragStack.data;
+        to.amount += dragStack.amount;
+
+        ClearDragStack();
         Changed.Invoke();
     }
 }

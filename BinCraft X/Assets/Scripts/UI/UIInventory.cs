@@ -51,10 +51,11 @@ public class UIInventory : MonoBehaviour
         if (willClearDragged)
         {
             willClearDragged = false;
-            slotHovered = null;
+            if (slotDragged)
+            {
+                inventory.ReturnDragStack(slotDragged.x, slotDragged.y);
+            }
             slotDragged = null;
-            inventory.SetDragStack(null, 0);
-            inventory.ClearDragStack();
             shiftDragged = false;
         }
     }
@@ -62,6 +63,15 @@ public class UIInventory : MonoBehaviour
     public void SetPanelVisible(bool value)
     {
         panel.SetActive(value);
+
+        // if we were dragging, cleanup
+        if (!value && slotDragged)
+        {
+            inventory.ReturnDragStack(slotDragged.x, slotDragged.y);
+            slotDragged = null;
+            shiftDragged = false;
+            slotDrag.gameObject.SetActive(false);
+        }
     }
 
     public bool GetPanelVisible()
