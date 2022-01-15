@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[ExecuteInEditMode]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private DataEnemy data;
     public DataEnemy Data
     {
         set
@@ -20,58 +18,39 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public Gradient gradientHealth;
-
-    private MeshFilter mf;
-    private MeshRenderer mr;
-    private Health health;
+    [Header("Ref")]
+    [SerializeField] private MeshRenderer meshRendererHealthGradient;
+    [SerializeField] private DataEnemy data;
+    [SerializeField] private Health health;
+    [SerializeField] private Gradient gradientHealth;
 
     [HideInInspector] public UnityEvent Died;
 
     private void Awake()
     {
-        mf = GetComponent<MeshFilter>();
-        mr = GetComponent<MeshRenderer>();
         Data = data;
 
-        if (Application.isPlaying)
-        {
-            health = GetComponent<Health>();
-            health.Changed.AddListener(OnHealthChanged);
-            health.Depleted.AddListener(OnHealthDepleted);
-        }
+        health.Changed.AddListener(OnHealthChanged);
+        health.Depleted.AddListener(OnHealthDepleted);
     }
 
     private void Start()
     {
         Data = data;
-        if (Application.isPlaying)
-        {
-            UpdateColorHealth();
-        }
+        UpdateColorHealth();
     }
 
     private void ApplyData()
     {
         if (data)
         {
-            if (mf) { mf.sharedMesh = data.mesh; }
-            if (mr) { mr.material = data.material; }
-            if (Application.isPlaying && health)
-            {
-                health.SetHPMax(data.hp, true);
-            }
-        }
-        else
-        {
-            if (mf) { mf.sharedMesh = Resources.GetBuiltinResource<Mesh>("Cylinder.fbx"); }
-            if (mr) { mr.material = null; }
+            health.SetHPMax(data.hp, true);
         }
     }
 
     private void UpdateColorHealth()
     {
-        mr.material.color = gradientHealth.Evaluate(health.GetFactor());
+        meshRendererHealthGradient.material.color = gradientHealth.Evaluate(health.GetFactor());
     }
 
     private void OnHealthChanged()
@@ -83,10 +62,5 @@ public class Enemy : MonoBehaviour
     {
         Died.Invoke();
         Destroy(gameObject);
-    }
-
-    private void OnValidate()
-    {
-        Data = data;
     }
 }
