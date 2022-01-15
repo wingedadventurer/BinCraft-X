@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseLook : MonoBehaviour
+public class Looking : MonoBehaviour
 {
     const float ANGLE_Y_OFFSET_MAX = 89.0f;
 

@@ -132,10 +132,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 407462bbc09dcae429842c3d939cae88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accMove: 15
-  dccMove: 20
+  accMove: 25
+  dccMove: 40
   speedWalkMax: 3
-  speedRunMax: 4.5
+  speedRunMax: 5.5
   gravity: 12
   speedJump: 4.5
   characterController: {fileID: 4470392158604051388}

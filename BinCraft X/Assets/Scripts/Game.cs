@@ -36,7 +36,7 @@ public class Game : MonoBehaviour
             UIGame.instance.SetPanelVisible(!paused);
 
             FindObjectOfType<Movement>().enabled = !paused;
-            FindObjectOfType<MouseLook>().enabled = !paused;
+            FindObjectOfType<Looking>().enabled = !paused;
             FindObjectOfType<Interaction>().enabled = !paused;
             FindObjectOfType<Shooting>().enabled = !paused;
             FindObjectOfType<Well>().enabled = !paused;
