@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Furnace : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Furnace : MonoBehaviour
     private float tBurn;
     private bool canInteract;
     private bool interactEntered;
+
+    [HideInInspector] public UnityEvent Finished;
 
     private void Awake()
     {
@@ -57,8 +60,9 @@ public class Furnace : MonoBehaviour
                 particleSmoke.Stop();
                 goLightFire.SetActive(false);
                 goIceCube.SetActive(false);
-                UpdateInteractionText();
                 canInteract = true;
+                Finished.Invoke();
+                UpdateInteractionText();
             }
         }
     }
@@ -88,8 +92,8 @@ public class Furnace : MonoBehaviour
             particleSmoke.Play();
             goLightFire.SetActive(true);
             goIceCube.SetActive(true);
-            UpdateInteractionText();
             canInteract = false;
+            UpdateInteractionText();
         }
     }
 

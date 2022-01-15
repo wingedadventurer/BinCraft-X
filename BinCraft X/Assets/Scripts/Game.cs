@@ -39,7 +39,7 @@ public class Game : MonoBehaviour
             FindObjectOfType<MouseLook>().enabled = !paused;
             FindObjectOfType<Interaction>().enabled = !paused;
             FindObjectOfType<Shooting>().enabled = !paused;
-            FindObjectOfType<EnemySpawner>().enabled = !paused;
+            FindObjectOfType<Well>().enabled = !paused;
             BulletPool.instance.SetBulletsEnabled(!paused);
 
             Time.timeScale = paused ? 0 : 1;

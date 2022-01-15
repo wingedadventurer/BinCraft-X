@@ -25,8 +25,7 @@ public class UIGame : MonoBehaviour
         SetInteractPrompt("");
         SetHealth(0, 100);
         SetAmmo(0);
-        SetCubesCurrent(0);
-        SetCubesNeeded(1);
+        SetCubesRemaining(0);
     }
     
     public void SetPanelVisible(bool value)
@@ -51,15 +50,8 @@ public class UIGame : MonoBehaviour
         textAmmo.text = amount.ToString();
     }
 
-    public void SetCubesCurrent(int amount)
+    public void SetCubesRemaining(int amount)
     {
-        cubesCurrent = amount;
-        textCubes.text = cubesCurrent + "/" + cubesNeeded;
-    }
-
-    public void SetCubesNeeded(int amount)
-    {
-        cubesNeeded = amount;
-        textCubes.text = cubesCurrent + "/" + cubesNeeded;
+        textCubes.text = amount.ToString();
     }
 }

@@ -4,23 +4,37 @@ using UnityEngine;
 
 public class WinChecker : MonoBehaviour
 {
-    [SerializeField] private DataItem dataGreenCube;
-    [SerializeField] private DataItem dataYellowCube;
+    [SerializeField] private DataItem dataIceCube;
 
-    private int countCubesCurrent;
-    private int countCubesNeeded;
-    public int countEnemies;
+    private int countRemainingIceCubes;
+    private int countEnemies;
 
-    // Start is called before the first frame update
     void Start()
     {
-        // get count of needed cubes
+        // get count of ice cubes
         foreach (Item item in FindObjectsOfType<Item>())
         {
-            if (item.Data == dataGreenCube || item.Data == dataYellowCube)
+            if (item.Data == dataIceCube)
             {
-                countCubesNeeded++;
+                countRemainingIceCubes++;
             }
+        }
+
+        UIGame.instance.SetCubesRemaining(countRemainingIceCubes);
+
+        // hook up furnace finishes
+        foreach (Furnace furnace in FindObjectsOfType<Furnace>())
+        {
+            furnace.Finished.AddListener(OnFurnaceFinished);
+        }
+
+        // get count of enemies
+        countEnemies = FindObjectsOfType<Enemy>().Length;
+
+        // hook up enemy spawns
+        foreach (Well well in FindObjectsOfType<Well>())
+        {
+            well.Spawned.AddListener(delegate { OnEnemySpawned(well.lastSpawnedEnemy); });
         }
 
         // hook up enemy deaths
@@ -30,19 +44,21 @@ public class WinChecker : MonoBehaviour
             countEnemies++;
         }
 
-        // hook up enemy spawner spawns
-        foreach (EnemySpawner enemySpawner in FindObjectsOfType<EnemySpawner>())
-        {
-            enemySpawner.Spawned.AddListener(delegate { OnEnemySpawnerSpawned(enemySpawner); });
-        }
-
+        // hook up player death
         FindObjectOfType<Player>().Died.AddListener(OnPlayerDied);
+    }
 
-        // get count of enemies
-        countEnemies = FindObjectsOfType<Enemy>().Length;
+    private void OnFurnaceFinished()
+    {
+        countRemainingIceCubes--;
+        UIGame.instance.SetCubesRemaining(countRemainingIceCubes);
+        CheckForWin();
+    }
 
-        UIGame.instance.SetCubesNeeded(countCubesNeeded);
-        Inventory.instance.Changed.AddListener(OnInventoryChanged);
+    private void OnEnemySpawned(Enemy enemy)
+    {
+        enemy.Died.AddListener(OnEnemyDied);
+        countEnemies++;
     }
 
     private void OnEnemyDied()
@@ -51,28 +67,14 @@ public class WinChecker : MonoBehaviour
         CheckForWin();
     }
 
-    private void OnInventoryChanged()
-    {
-        // update cubes UI
-        countCubesCurrent = Inventory.instance.GetItemCount(dataGreenCube) + Inventory.instance.GetItemCount(dataYellowCube);
-        UIGame.instance.SetCubesCurrent(countCubesCurrent);
-        CheckForWin();
-    }
-
     private void OnPlayerDied()
     {
         Game.instance.OnGameLose();
     }
 
-    private void OnEnemySpawnerSpawned(EnemySpawner enemySpawner)
-    {
-        enemySpawner.lastSpawnedEnemy.Died.AddListener(OnEnemyDied);
-        countEnemies++;
-    }
-
     private void CheckForWin()
     {
-        if (countCubesCurrent == countCubesNeeded && countEnemies == 0)
+        if (countRemainingIceCubes == 0 && countEnemies == 0)
         {
             Game.instance.OnGameWin();
         }
