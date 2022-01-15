@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour
 {
-    public Interaction interaction;
+    [HideInInspector] public Interaction interaction;
 
-    public UnityEvent InteractEnter;
-    public UnityEvent Interacted;
+    [HideInInspector] public UnityEvent InteractEnter;
+    [HideInInspector] public UnityEvent Interacted;
 }

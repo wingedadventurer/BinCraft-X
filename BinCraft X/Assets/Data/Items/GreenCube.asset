@@ -16,5 +16,4 @@ MonoBehaviour:
   maxStackCount: 5
   hp: 0
   spriteInventory: {fileID: 21300000, guid: 67e6704c2eb7f034a9b7942b695f8004, type: 3}
-  mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: 8caed18c6ef2ff44384c26a2e215f845, type: 2}
+  model: {fileID: 5346995372494563485, guid: 219af249d4f690841af539af2fac4daf, type: 3}

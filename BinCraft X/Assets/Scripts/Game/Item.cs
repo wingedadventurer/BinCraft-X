@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-[ExecuteInEditMode]
+[RequireComponent(typeof(Health), typeof(Interactable))]
 public class Item : MonoBehaviour
 {
     [SerializeField] private DataItem data;
@@ -22,11 +22,10 @@ public class Item : MonoBehaviour
 
     public int amount = 1;
 
-    private MeshFilter mf;
-    private MeshRenderer mr;
-    private MeshCollider mc;
+    private Rigidbody rigidBody;
     private Health health;
     private Interactable interactable;
+    private GameObject model;
 
     bool picked;
     private Vector3 posPickStart;
@@ -35,19 +34,13 @@ public class Item : MonoBehaviour
 
     private void Awake()
     {
-        mf = GetComponent<MeshFilter>();
-        mr = GetComponent<MeshRenderer>();
-        mc = GetComponent<MeshCollider>();
-        Data = data;
+        rigidBody = GetComponent<Rigidbody>();
 
-        if (Application.isPlaying)
-        {
-            health = GetComponent<Health>();
-            health.Depleted.AddListener(OnHealthDepleted);
-            interactable = GetComponent<Interactable>();
-            interactable.Interacted.AddListener(OnInteracted);
-            interactable.InteractEnter.AddListener(OnInteractEnter);
-        }
+        health = GetComponent<Health>();
+        health.Depleted.AddListener(OnHealthDepleted);
+        interactable = GetComponent<Interactable>();
+        interactable.Interacted.AddListener(OnInteracted);
+        interactable.InteractEnter.AddListener(OnInteractEnter);
     }
 
     private void Start()
@@ -57,12 +50,9 @@ public class Item : MonoBehaviour
 
     private void Update()
     {
-        if (Application.isPlaying)
-        { 
-            if (picked)
-            {
-                transform.position = Vector3.Lerp(posPickStart, transformPickEnd.position, fPick);
-            }
+        if (picked)
+        {
+            transform.position = Vector3.Lerp(posPickStart, transformPickEnd.position, fPick);
         }
     }
 
@@ -70,10 +60,7 @@ public class Item : MonoBehaviour
     {
         if (data)
         {
-            if (mf) { mf.sharedMesh = data.mesh; }
-            if (mr) { mr.material = data.material; }
-            if (mc) { mc.sharedMesh = mf.sharedMesh; }
-            if (Application.isPlaying && health)
+            if (health)
             {
                 health.enabled = data.hp > 0;
                 health.SetHPMax(data.hp, true);
@@ -81,10 +68,7 @@ public class Item : MonoBehaviour
         }
         else
         {
-            if (mf) { mf.sharedMesh = Resources.GetBuiltinResource<Mesh>("Cube.fbx"); }
-            if (mr) { mr.material = null; }
-            if (mc) { mc.sharedMesh = null; }
-            if (Application.isPlaying && health)
+            if (health)
             {
                 health.enabled = false;
             }
@@ -103,8 +87,12 @@ public class Item : MonoBehaviour
         {
             UIGame.instance.SetInteractPrompt("");
 
-            GetComponent<Rigidbody>().isKinematic = true;
-            mc.enabled = false;
+            foreach (Collider collider in GetComponentsInChildren<Collider>())
+            {
+                collider.enabled = false;
+            }
+
+            rigidBody.isKinematic = true;
             health.enabled = false;
             interactable.enabled = false;
 
@@ -139,10 +127,5 @@ public class Item : MonoBehaviour
     private void OnPickTweenComplete()
     {
         Destroy(gameObject);
-    }
-
-    private void OnValidate()
-    {
-        Data = data;
     }
 }

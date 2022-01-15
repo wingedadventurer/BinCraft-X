@@ -20,7 +20,6 @@ public class Game : MonoBehaviour
     public bool playerControllable;
 
     public GameObject goItems;
-    public GameObject prefabItem;
 
     // set to false on game win or lose
     private bool running = true;
@@ -142,10 +141,11 @@ public class Game : MonoBehaviour
 
     public void SpawnItem(DataItem data, int amount)
     {
-        GameObject goItem = Instantiate(prefabItem, goItems.transform);
+        GameObject goItem = Instantiate(data.prefabItem, goItems.transform);
         goItem.transform.position = player.transform.position;
         Item item = goItem.GetComponent<Item>();
         item.Data = data;
+        item.name = data.name;
         item.amount = amount;
         item.ApplyData();
     }

@@ -5,11 +5,11 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
-    public UnityEvent Changed;
-    public UnityEvent Depleted;
-
     [SerializeField] private float hp;
     [SerializeField] private float hpMax = 100;
+
+    public UnityEvent Changed;
+    public UnityEvent Depleted;
 
     private void Start()
     {

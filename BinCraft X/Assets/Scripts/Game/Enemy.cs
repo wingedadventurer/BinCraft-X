@@ -34,8 +34,6 @@ public class Enemy : MonoBehaviour
         mr = GetComponent<MeshRenderer>();
         Data = data;
 
-        Debug.Log(gameObject.name);
-
         if (Application.isPlaying)
         {
             health = GetComponent<Health>();

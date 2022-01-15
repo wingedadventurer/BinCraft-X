@@ -17,6 +17,5 @@ public class DataItem : ScriptableObject
     public Sprite spriteInventory;
 
     [Header("World representation")]
-    public Mesh mesh;
-    public Material material;
+    public GameObject prefabItem;
 }
