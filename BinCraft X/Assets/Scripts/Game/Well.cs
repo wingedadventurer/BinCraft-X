@@ -43,7 +43,8 @@ public class Well : MonoBehaviour
 
         goLid.SetActive(false);
 
-        SpawnEnemy();
+
+        StartTimer();
     }
 
     private void SpawnEnemy()

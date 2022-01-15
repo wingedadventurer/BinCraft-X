@@ -14,9 +14,7 @@ public class UIGame : MonoBehaviour
     [SerializeField] private Image imageHPBar;
     [SerializeField] private Text textAmmo;
     [SerializeField] private Text textCubes;
-
-    private int cubesCurrent;
-    private int cubesNeeded;
+    [SerializeField] private Text textEnemies;
 
     private void Awake()
     {
@@ -26,6 +24,7 @@ public class UIGame : MonoBehaviour
         SetHealth(0, 100);
         SetAmmo(0);
         SetCubesRemaining(0);
+        SetEnemiesRemaining(0);
     }
     
     public void SetPanelVisible(bool value)
@@ -53,5 +52,10 @@ public class UIGame : MonoBehaviour
     public void SetCubesRemaining(int amount)
     {
         textCubes.text = amount.ToString();
+    }
+
+    public void SetEnemiesRemaining(int amount)
+    {
+        textEnemies.text = amount.ToString();
     }
 }

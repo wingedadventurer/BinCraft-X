@@ -9,8 +9,12 @@ public class WinChecker : MonoBehaviour
     private int countRemainingIceCubes;
     private int countEnemies;
 
+    private UIGame uiGame;
+
     void Start()
     {
+        uiGame = UIGame.instance;
+
         // get count of ice cubes
         foreach (Item item in FindObjectsOfType<Item>())
         {
@@ -20,16 +24,13 @@ public class WinChecker : MonoBehaviour
             }
         }
 
-        UIGame.instance.SetCubesRemaining(countRemainingIceCubes);
+        uiGame.SetCubesRemaining(countRemainingIceCubes);
 
         // hook up furnace finishes
         foreach (Furnace furnace in FindObjectsOfType<Furnace>())
         {
             furnace.Finished.AddListener(OnFurnaceFinished);
         }
-
-        // get count of enemies
-        countEnemies = FindObjectsOfType<Enemy>().Length;
 
         // hook up enemy spawns
         foreach (Well well in FindObjectsOfType<Well>())
@@ -59,11 +60,13 @@ public class WinChecker : MonoBehaviour
     {
         enemy.Died.AddListener(OnEnemyDied);
         countEnemies++;
+        uiGame.SetEnemiesRemaining(countEnemies);
     }
 
     private void OnEnemyDied()
     {
         countEnemies--;
+        uiGame.SetEnemiesRemaining(countEnemies);
         CheckForWin();
     }
 
