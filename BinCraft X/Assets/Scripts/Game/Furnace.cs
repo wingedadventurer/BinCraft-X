@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barrel : MonoBehaviour
+public class Furnace : MonoBehaviour
 {
     [SerializeField] private float durationBurn;
 
     [Header("Ref")]
-    [SerializeField] private GameObject areaHeal;
-    [SerializeField] private GameObject lightFire;
-    [SerializeField] private DataItem dataItemFuel;
+    [SerializeField] private DataItem dataItemIceCube;
     [SerializeField] private ParticleSystem particleFire;
+    [SerializeField] private ParticleSystem particleSmoke;
+    [SerializeField] private GameObject goLightFire;
+    [SerializeField] private GameObject goIceCube;
+    [SerializeField] private Transform transformIceCubePivot;
 
     private Inventory inventory;
     private UIGame uiGame;
@@ -21,8 +23,9 @@ public class Barrel : MonoBehaviour
     private void Awake()
     {
         particleFire.Stop();
-        areaHeal.SetActive(false);
-        lightFire.SetActive(false);
+        particleSmoke.Stop();
+        goLightFire.SetActive(false);
+        goIceCube.SetActive(false);
     }
 
     private void Start()
@@ -44,15 +47,18 @@ public class Barrel : MonoBehaviour
     {
         if (tBurn > 0)
         {
+            transformIceCubePivot.localScale = Vector3.one * (tBurn / durationBurn);
+
             tBurn -= Time.deltaTime;
             if (tBurn <= 0)
             {
                 // fire burnt out
                 particleFire.Stop();
-                areaHeal.SetActive(false);
-                lightFire.SetActive(false);
-                canInteract = true;
+                particleSmoke.Stop();
+                goLightFire.SetActive(false);
+                goIceCube.SetActive(false);
                 UpdateInteractionText();
+                canInteract = true;
             }
         }
     }
@@ -72,16 +78,18 @@ public class Barrel : MonoBehaviour
     public void OnInteracted()
     {
         if (!canInteract) { return; }
-        if (tBurn <= 0 && inventory.HasItem(dataItemFuel))
+
+        if (tBurn <= 0 && inventory.HasItem(dataItemIceCube))
         {
-            // use fuel and light the fire
-            inventory.RemoveItem(dataItemFuel);
+            // use ice cube and light the furnace
+            inventory.RemoveItem(dataItemIceCube);
             tBurn = durationBurn;
             particleFire.Play();
-            areaHeal.SetActive(true);
-            lightFire.SetActive(true);
-            canInteract = false;
+            particleSmoke.Play();
+            goLightFire.SetActive(true);
+            goIceCube.SetActive(true);
             UpdateInteractionText();
+            canInteract = false;
         }
     }
 
@@ -93,14 +101,14 @@ public class Barrel : MonoBehaviour
         {
             if (interactEntered)
             {
-                if (inventory.HasItem(dataItemFuel))
+                if (inventory.HasItem(dataItemIceCube))
                 {
-                    s = "[E] Add Fuel";
+                    s = "[E] Add Ice Cube";
 
                 }
                 else
                 {
-                    s = "Needs Fuel";
+                    s = "Needs Ice Cubes";
                 }
             }
             else

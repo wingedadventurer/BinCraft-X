@@ -195,7 +195,7 @@ ParticleSystem:
   lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
-  cullingMode: 0
+  cullingMode: 1
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
@@ -5007,10 +5007,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   durationBurn: 5
-  dataItemFuel: {fileID: 11400000, guid: 5f459118c226ae24abef659f5aa6ef31, type: 2}
-  particleFire: {fileID: 5318006190398220135}
   areaHeal: {fileID: 22652216034536599}
   lightFire: {fileID: 248688752659715217}
+  dataItemFuel: {fileID: 11400000, guid: 5f459118c226ae24abef659f5aa6ef31, type: 2}
+  particleFire: {fileID: 5318006190398220135}
 --- !u!114 &5649292180379378455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5024,7 +5024,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interaction: {fileID: 0}
-  InteractEnter:
+  InteractEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  InteractExited:
     m_PersistentCalls:
       m_Calls: []
   Interacted:
