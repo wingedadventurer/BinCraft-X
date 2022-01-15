@@ -6,12 +6,19 @@ using UnityEngine.Events;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float healthDecreaseRate;
+    [SerializeField] private float healthDecreaseRatePerIceCube;
 
     [Header("Ref")]
     [SerializeField] private DataItem itemAmmo;
+    [SerializeField] private DataItem itemIceCube;
     [SerializeField] private Health health;
 
     [HideInInspector] public UnityEvent Died;
+
+    private int countIceCubes;
+
+    private Inventory inventory;
+    private UIGame uiGame;
 
     private void Awake()
     {
@@ -20,10 +27,13 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        health.Changed.AddListener(UpdateHealthUI);
+        inventory = Inventory.instance;
+        uiGame = UIGame.instance;
+
+        health.Changed.AddListener(OnHealthChanged);
         health.Depleted.AddListener(OnHealthDepleted);
-        Inventory.instance.Changed.AddListener(UpdateAmmoUI);
-        UIGame.instance.SetHealth(health.GetHP(), health.GetHPMax());
+        inventory.Changed.AddListener(OnInventoryChanged);
+        uiGame.SetHealth(health.GetHP(), health.GetHPMax());
 
         UpdateHealthUI();
         UpdateAmmoUI();
@@ -31,7 +41,12 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        health.ChangeBy(-healthDecreaseRate * Time.deltaTime);
+        health.ChangeBy(- (healthDecreaseRate + healthDecreaseRatePerIceCube * countIceCubes) * Time.deltaTime);
+    }
+
+    private void OnHealthChanged()
+    {
+        UpdateHealthUI();
     }
 
     private void OnHealthDepleted()
@@ -39,13 +54,19 @@ public class Player : MonoBehaviour
         Died.Invoke();
     }
 
+    private void OnInventoryChanged()
+    {
+        UpdateAmmoUI();
+        countIceCubes = inventory.GetItemCount(itemIceCube);
+    }
+
     private void UpdateHealthUI()
     {
-        UIGame.instance.SetHealth(health.GetHP(), health.GetHPMax());
+        uiGame.SetHealth(health.GetHP(), health.GetHPMax());
     }
 
     private void UpdateAmmoUI()
     {
-        UIGame.instance.SetAmmo(Inventory.instance.GetItemCount(itemAmmo));
+        uiGame.SetAmmo(inventory.GetItemCount(itemAmmo));
     }
 }

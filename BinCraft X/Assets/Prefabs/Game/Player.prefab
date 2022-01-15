@@ -99,7 +99,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthDecreaseRate: 1
+  healthDecreaseRatePerIceCube: 1
   itemAmmo: {fileID: 11400000, guid: 0c648c2257bdc654eacf098f46a4f6c8, type: 2}
+  itemIceCube: {fileID: 11400000, guid: 277371f452c963641b4a4174fefaf535, type: 2}
   health: {fileID: 5692526125181518078}
   Died:
     m_PersistentCalls:
