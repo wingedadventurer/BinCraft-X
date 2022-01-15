@@ -13,6 +13,7 @@ public class Menu : MonoBehaviour
     {
         panelMain.SetActive(true);
         panelLoading.SetActive(false);
+        Audio.instance.PlaySong(Songs.Menu);
     }
 
     public void StartGame()

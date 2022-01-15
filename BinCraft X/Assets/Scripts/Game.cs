@@ -75,6 +75,8 @@ public class Game : MonoBehaviour
 
         Paused = false;
         playerControllable = true;
+
+        Audio.instance.PlaySong(Songs.Game);
     }
 
     private void Update()
