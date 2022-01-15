@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 79d9d8b52541c494ab4cdc59298f4186, type: 3}
-  m_Name: GreenCube
+  m_Name: Well Lid
   m_EditorClassIdentifier: 
-  name: Green Cube
+  name: Well Lid
   maxStackCount: 5
   hp: 0
-  spriteInventory: {fileID: 21300000, guid: 67e6704c2eb7f034a9b7942b695f8004, type: 3}
-  model: {fileID: 5346995372494563485, guid: 219af249d4f690841af539af2fac4daf, type: 3}
+  spriteInventory: {fileID: 21300000, guid: 22b8c9f084fef31469a23af1c865a31c, type: 3}
+  prefabItem: {fileID: 2950498296145935072, guid: 907723f61a989614f8dead65b59c6c3a, type: 3}
