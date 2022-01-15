@@ -8,9 +8,10 @@ public class UIGame : MonoBehaviour
     public static UIGame instance;
 
     [SerializeField] private GameObject panel;
-
+    [SerializeField] private Gradient gradientHealth;
     [SerializeField] private Text textInteractPrompt;
     [SerializeField] private Slider sliderHP;
+    [SerializeField] private Image imageHPBar;
     [SerializeField] private Text textAmmo;
     [SerializeField] private Text textCubes;
 
@@ -42,6 +43,7 @@ public class UIGame : MonoBehaviour
     {
         sliderHP.maxValue = hpMax;
         sliderHP.value = hp;
+        imageHPBar.color = gradientHealth.Evaluate(hp / hpMax);
     }
 
     public void SetAmmo(int amount)

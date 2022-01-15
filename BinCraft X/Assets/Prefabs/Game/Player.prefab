@@ -98,6 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c13cb7e98651d84ab858e9f208c7974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthDecreaseRate: 1
+  itemAmmo: {fileID: 11400000, guid: 0c648c2257bdc654eacf098f46a4f6c8, type: 2}
+  health: {fileID: 5692526125181518078}
+  Died:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5762246057294669704
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +117,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 6
-  active: 0
   transformHead: {fileID: 4970877875814414149}
 --- !u!114 &2351375404618190326
 MonoBehaviour:
@@ -131,7 +136,6 @@ MonoBehaviour:
   speedRunMax: 4.5
   gravity: 12
   speedJump: 4.5
-  active: 0
   characterController: {fileID: 4470392158604051388}
   camHead: {fileID: 884386163586549319}
 --- !u!114 &5692526125181518078
@@ -146,14 +150,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4c432f04da98b4394d758b20a2df6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  hpMax: 80
   Changed:
     m_PersistentCalls:
       m_Calls: []
   Depleted:
     m_PersistentCalls:
       m_Calls: []
-  hp: 0
-  hpMax: 80
 --- !u!114 &1230972058025004755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectDistanceMax: 2
-  textInteractPrompt: {fileID: 0}
+  controllable: 0
 --- !u!114 &7157315795876521818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +187,7 @@ MonoBehaviour:
   bulletSpeed: 20
   bulletDamage: 25
   transformBulletSpawn: {fileID: 3907677468117844451}
+  dataBullet: {fileID: 0}
 --- !u!1 &5163562771236228989
 GameObject:
   m_ObjectHideFlags: 0

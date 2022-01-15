@@ -5,9 +5,11 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private DataItem itemAmmo;
+    [SerializeField] private float healthDecreaseRate;
 
-    private Health health;
+    [Header("Ref")]
+    [SerializeField] private DataItem itemAmmo;
+    [SerializeField] private Health health;
 
     [HideInInspector] public UnityEvent Died;
 
@@ -25,6 +27,11 @@ public class Player : MonoBehaviour
 
         UpdateHealthUI();
         UpdateAmmoUI();
+    }
+
+    private void Update()
+    {
+        health.ChangeBy(-healthDecreaseRate * Time.deltaTime);
     }
 
     private void OnHealthDepleted()
