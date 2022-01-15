@@ -13,12 +13,16 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private GameObject containerInventorySlot;
     [SerializeField] private GridLayoutGroup containerGridLayoutGroup;
     [SerializeField] private RectTransform rectTransformSlotDrag;
+    [SerializeField] private RectTransform rectTransformMouse;
 
     private UIInventorySlot[,] slots;
     [SerializeField] private UIInventorySlot slotDrag;
 
     private UIInventorySlot slotHovered;
     private UIInventorySlot slotDragged;
+
+    [SerializeField] private GameObject panelDescription;
+    [SerializeField] private Text textDescription;
 
     private Inventory inventory;
 
@@ -37,16 +41,19 @@ public class UIInventory : MonoBehaviour
         AddSlots();
         UpdateSlots();
         UpdateDragSlot();
+        UpdateDescriptionText();
     }
 
     private void Update()
     {
+        rectTransformMouse.position = Input.mousePosition;
+
         // move mouse slot to mouse + add offset
         rectTransformSlotDrag.position = Input.mousePosition;
         // move to bottom-right
-        rectTransformSlotDrag.position += new Vector3(rectTransformSlotDrag.rect.size.x, -rectTransformSlotDrag.rect.size.y, 0) * 0.5f;
+        //rectTransformSlotDrag.position += new Vector3(rectTransformSlotDrag.rect.size.x, -rectTransformSlotDrag.rect.size.y, 0) * 0.5f;
         // apply offset
-        rectTransformSlotDrag.position += new Vector3(40, 0, 0);
+        //rectTransformSlotDrag.position += new Vector3(40, 0, 0);
 
         if (willClearDragged)
         {
@@ -56,6 +63,7 @@ public class UIInventory : MonoBehaviour
                 inventory.ReturnDragStack(slotDragged.x, slotDragged.y);
             }
             slotDragged = null;
+            UpdateDescriptionText();
             shiftDragged = false;
         }
     }
@@ -69,6 +77,7 @@ public class UIInventory : MonoBehaviour
         {
             inventory.ReturnDragStack(slotDragged.x, slotDragged.y);
             slotDragged = null;
+            UpdateDescriptionText();
             shiftDragged = false;
             slotDrag.gameObject.SetActive(false);
         }
@@ -135,14 +144,35 @@ public class UIInventory : MonoBehaviour
         }
     }
 
+    public void UpdateDescriptionText()
+    {
+        textDescription.text = "";
+        panelDescription.SetActive(false);
+
+        if (slotHovered && !slotDragged)
+        {
+            ItemStack stack = inventory.GetItemStack(slotHovered.x, slotHovered.y);
+            if (stack.data)
+            {
+                panelDescription.SetActive(true);
+                textDescription.text = stack.data.description;
+
+                // necessary cuz panel updates weirdly
+                LayoutRebuilder.ForceRebuildLayoutImmediate(panelDescription.GetComponent<RectTransform>());
+            }
+        }
+    }
+
     public void OnSlotEntered(UIInventorySlot slot)
     {
         slotHovered = slot;
+        UpdateDescriptionText();
     }
 
     public void OnSlotExited(UIInventorySlot slot)
     {
         slotHovered = null;
+        UpdateDescriptionText();
     }
 
     public void OnSlotPressed(UIInventorySlot slot)
@@ -154,6 +184,7 @@ public class UIInventory : MonoBehaviour
             slotDragged = slot;
             inventory.SetDragStack(stack.data, stack.amount);
             inventory.ClearItemStack(slot.x, slot.y);
+            UpdateDescriptionText();
         }
     }
 
@@ -175,6 +206,7 @@ public class UIInventory : MonoBehaviour
             {
                 // shift drag -> split
                 slotDragged = slot;
+                UpdateDescriptionText();
                 int splitAmount = stack.amount / 2 + stack.amount % 2;
                 inventory.SetStack(slot.x, slot.y, stack.data, stack.amount - splitAmount);
                 inventory.SetDragStack(stack.data, splitAmount);
@@ -184,6 +216,7 @@ public class UIInventory : MonoBehaviour
             {
                 // normal drag -> 1
                 slotDragged = slot;
+                UpdateDescriptionText();
                 int splitAmount = 1;
                 inventory.SetStack(slot.x, slot.y, stack.data, stack.amount - splitAmount);
                 inventory.SetDragStack(stack.data, splitAmount);

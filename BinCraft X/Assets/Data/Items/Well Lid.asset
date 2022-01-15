@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: Well Lid
   m_EditorClassIdentifier: 
   name: Well Lid
+  description: 'Interact with well to close it and
+
+    prevent things from leaving
+    it.'
   maxStackCount: 5
   hp: 0
   spriteInventory: {fileID: 21300000, guid: 22b8c9f084fef31469a23af1c865a31c, type: 3}

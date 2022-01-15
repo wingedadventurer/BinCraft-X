@@ -8,6 +8,9 @@ public class DataItem : ScriptableObject
 {
     new public string name;
 
+    [TextArea(3, 10)]
+    public string description;
+
     public int maxStackCount = 1;
 
     [Header("HP (leave 0 for invincibility)")]

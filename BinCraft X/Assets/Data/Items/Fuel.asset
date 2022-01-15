@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Fuel
   m_EditorClassIdentifier: 
   name: Fuel
+  description: 'Helps set things on fire.
+
+    Friendly reminder: fire gives heat!'
   maxStackCount: 10
   hp: 100
   spriteInventory: {fileID: 21300000, guid: 1f454913dd0467c4aaa06efdc1058f11, type: 3}
