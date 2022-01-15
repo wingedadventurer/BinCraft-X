@@ -48,6 +48,17 @@ public class Interaction : MonoBehaviour
                     interactableLast.InteractEnter.Invoke();
                 }
             }
+            else if (go.TryGetComponent<Barrel>(out Barrel barrel))
+            {
+                Interactable interactable = go.GetComponent<Interactable>();
+
+                if (interactableLast != interactable)
+                {
+                    interactableLast = interactable;
+                    interactableLast.interaction = this;
+                    interactableLast.InteractEnter.Invoke();
+                }
+            }
             else
             {
                 ClearInteractableLast();
