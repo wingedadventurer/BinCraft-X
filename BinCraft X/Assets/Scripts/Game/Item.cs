@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-[RequireComponent(typeof(Health), typeof(Interactable))]
+[RequireComponent(typeof(Health))]
 public class Item : MonoBehaviour
 {
     [SerializeField] private DataItem data;
@@ -24,10 +24,11 @@ public class Item : MonoBehaviour
 
     private Rigidbody rigidBody;
     private Health health;
-    private Interactable interactable;
     private GameObject model;
+    private Interactable[] interactables;
 
-    bool picked;
+    private bool picked;
+    private bool canInteract;
     private Vector3 posPickStart;
     private Transform transformPickEnd;
     private float fPick = 0.0f;
@@ -38,14 +39,18 @@ public class Item : MonoBehaviour
 
         health = GetComponent<Health>();
         health.Depleted.AddListener(OnHealthDepleted);
-        interactable = GetComponent<Interactable>();
-        interactable.Interacted.AddListener(OnInteracted);
-        interactable.InteractEnter.AddListener(OnInteractEnter);
+
+        foreach (Interactable interactable in GetComponentsInChildren<Interactable>())
+        {
+            interactable.Interacted.AddListener(OnInteracted);
+            interactable.InteractEntered.AddListener(OnInteractEnter);
+        }
     }
 
     private void Start()
     {
         Data = data;
+        canInteract = true;
     }
 
     private void Update()
@@ -77,24 +82,29 @@ public class Item : MonoBehaviour
 
     public void OnInteractEnter()
     {
+        if (!canInteract) { return; }
+
         UpdateInteractionText();
     }
 
     public void OnInteracted()
     {
+        if (!canInteract) { return; }
+
         amount = Inventory.instance.AddItem(data, amount);
         if (amount == 0)
         {
-            UIGame.instance.SetInteractPrompt("");
+            //UIGame.instance.SetInteractPrompt("");
 
             foreach (Collider collider in GetComponentsInChildren<Collider>())
             {
                 collider.enabled = false;
             }
 
+            canInteract = false;
+
             rigidBody.isKinematic = true;
             health.enabled = false;
-            interactable.enabled = false;
 
             posPickStart = transform.position;
             transformPickEnd = FindObjectOfType<Player>().transform;

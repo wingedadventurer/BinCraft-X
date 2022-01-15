@@ -36,27 +36,15 @@ public class Interaction : MonoBehaviour
         if (raycastHit.collider)
         {
             GameObject go = raycastHit.collider.gameObject;
-            
-            if (go.TryGetComponent<Item>(out Item item))
-            {
-                Interactable interactable = go.GetComponent<Interactable>();
 
+            if (go.TryGetComponent<Interactable>(out Interactable interactable))
+            {
                 if (interactableLast != interactable)
                 {
+                    ClearInteractableLast();
                     interactableLast = interactable;
                     interactableLast.interaction = this;
-                    interactableLast.InteractEnter.Invoke();
-                }
-            }
-            else if (go.TryGetComponent<Barrel>(out Barrel barrel))
-            {
-                Interactable interactable = go.GetComponent<Interactable>();
-
-                if (interactableLast != interactable)
-                {
-                    interactableLast = interactable;
-                    interactableLast.interaction = this;
-                    interactableLast.InteractEnter.Invoke();
+                    interactableLast.InteractEntered.Invoke();
                 }
             }
             else
@@ -74,6 +62,7 @@ public class Interaction : MonoBehaviour
     {
         if (interactableLast)
         {
+            interactableLast.InteractExited.Invoke();
             interactableLast = null;
             UIGame.instance.SetInteractPrompt("");
         }
