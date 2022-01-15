@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     }
 
     [Header("Ref")]
-    [SerializeField] private MeshRenderer meshRendererHealthGradient;
+    [SerializeField] private MeshRenderer[] meshRenderersHealthGradient;
     [SerializeField] private DataEnemy data;
     [SerializeField] private Health health;
     [SerializeField] private Gradient gradientHealth;
@@ -50,7 +50,16 @@ public class Enemy : MonoBehaviour
 
     private void UpdateColorHealth()
     {
-        meshRendererHealthGradient.material.color = gradientHealth.Evaluate(health.GetFactor());
+        foreach (MeshRenderer mr in meshRenderersHealthGradient)
+        {
+            foreach (Material material in mr.materials)
+            {
+                if (material.name.StartsWith("Penguin White"))
+                {
+                    material.color = gradientHealth.Evaluate(health.GetFactor());
+                }
+            }
+        }
     }
 
     private void OnHealthChanged()

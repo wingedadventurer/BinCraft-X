@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.21698111, g: 0.19391142, b: 0.1934407, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 2
+  m_AmbientIntensity: 3
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 8426cf3d3939a7d419671f3d5c269c0b, type: 2}
@@ -919,7 +919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3277582110368844323, guid: 4611e4360c88d214fbcef8aca9c2de1a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.614124
+      value: 30.79
       objectReference: {fileID: 0}
     - target: {fileID: 3277582110368844323, guid: 4611e4360c88d214fbcef8aca9c2de1a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -927,7 +927,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3277582110368844323, guid: 4611e4360c88d214fbcef8aca9c2de1a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 58.06
+      value: 44.69
       objectReference: {fileID: 0}
     - target: {fileID: 3277582110368844323, guid: 4611e4360c88d214fbcef8aca9c2de1a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4735,7 +4735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3277582110368844323, guid: 4611e4360c88d214fbcef8aca9c2de1a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.84
+      value: 40.21
       objectReference: {fileID: 0}
     - target: {fileID: 3277582110368844323, guid: 4611e4360c88d214fbcef8aca9c2de1a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4743,7 +4743,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3277582110368844323, guid: 4611e4360c88d214fbcef8aca9c2de1a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 59.45
+      value: 79.74
       objectReference: {fileID: 0}
     - target: {fileID: 3277582110368844323, guid: 4611e4360c88d214fbcef8aca9c2de1a, type: 3}
       propertyPath: m_LocalRotation.w
