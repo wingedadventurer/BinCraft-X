@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour
     private float distanceForStep;
 
     [HideInInspector] public UnityEvent Stepped;
+    [HideInInspector] public UnityEvent Landed;
 
     void Update()
     {
@@ -87,6 +88,7 @@ public class Movement : MonoBehaviour
                 // sometimes step is played at same time as land so we reset this
                 // (+ makes no sense to step right after landing)
                 distanceForStep = 0;
+                Landed.Invoke();
             }
             velocityY = 0;
         }

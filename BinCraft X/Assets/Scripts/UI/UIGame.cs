@@ -15,6 +15,7 @@ public class UIGame : MonoBehaviour
     [SerializeField] private Text textAmmo;
     [SerializeField] private Text textCubes;
     [SerializeField] private Text textEnemies;
+    [SerializeField] private GameObject goCrosshair;
 
     private void Awake()
     {
@@ -30,6 +31,11 @@ public class UIGame : MonoBehaviour
     public void SetPanelVisible(bool value)
     {
         panel.SetActive(value);
+    }
+
+    public void SetCrosshairVisible(bool value)
+    {
+        goCrosshair.SetActive(value);
     }
 
     public void SetInteractPrompt(string text)

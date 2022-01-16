@@ -37,7 +37,9 @@ public class Player : MonoBehaviour
         inventory.Changed.AddListener(OnInventoryChanged);
         uiGame.SetHealth(health.GetHP(), health.GetHPMax());
 
-        GetComponent<Movement>().Stepped.AddListener(OnStepped);
+        Movement movement = GetComponent<Movement>();
+        movement.Stepped.AddListener(OnStepped);
+        movement.Landed.AddListener(OnLanded);
 
         UpdateHealthUI();
         UpdateAmmoUI();
@@ -82,6 +84,11 @@ public class Player : MonoBehaviour
 
         anim.Stop();
         anim.Blend(anim.clip.name, 1.0f, 0.2f);
-        //anim.Play();
+    }
+
+    private void OnLanded()
+    {
+        anim.Stop();
+        anim.Blend(anim.clip.name, 1.0f, 0.2f);
     }
 }

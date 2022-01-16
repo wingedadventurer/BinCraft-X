@@ -42,6 +42,18 @@ public class Game : MonoBehaviour
             FindObjectOfType<Well>().enabled = !paused;
             BulletPool.instance.gameObject.SetActive(!paused);
 
+            foreach (AudioSource audioSource in FindObjectsOfType<AudioSource>())
+            {
+                if (paused)
+                {
+                    audioSource.Pause();
+                }
+                else
+                {
+                    audioSource.UnPause();
+                }
+            }
+
             Time.timeScale = paused ? 0 : 1;
 
             // NOTE: this works weird and agent loses their velocity on resume
@@ -88,6 +100,7 @@ public class Game : MonoBehaviour
                 if (UIInventory.instance.GetPanelVisible())
                 {
                     UIInventory.instance.SetPanelVisible(false);
+                    UIGame.instance.SetCrosshairVisible(true);
                     SetMouseLocked(true);
                     playerControllable = true;
                 }
@@ -103,6 +116,7 @@ public class Game : MonoBehaviour
             {
                 bool inventoryVisible = UIInventory.instance.GetPanelVisible();
                 UIInventory.instance.SetPanelVisible(!inventoryVisible);
+                UIGame.instance.SetCrosshairVisible(inventoryVisible);
                 SetMouseLocked(inventoryVisible);
                 playerControllable = inventoryVisible;
             }
