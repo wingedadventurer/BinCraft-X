@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c13cb7e98651d84ab858e9f208c7974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthDecreaseRate: 2
+  healthDecreaseRate: 1
   healthDecreaseRatePerIceCube: 2
   itemAmmo: {fileID: 11400000, guid: 0c648c2257bdc654eacf098f46a4f6c8, type: 2}
   itemIceCube: {fileID: 11400000, guid: 277371f452c963641b4a4174fefaf535, type: 2}
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a89d036a685ab584a851398f26878197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectDistanceMax: 2
+  detectDistanceMax: 2.5
   controllable: 0
 --- !u!114 &7157315795876521818
 MonoBehaviour:

@@ -21,7 +21,10 @@ public class UIInventory : MonoBehaviour
     private UIInventorySlot slotHovered;
     private UIInventorySlot slotDragged;
 
-    [SerializeField] private GameObject panelDescription;
+    [SerializeField] private GameObject panelItem;
+    [SerializeField] private GameObject panelItemName;
+    [SerializeField] private GameObject panelItemDescription;
+    [SerializeField] private Text textName;
     [SerializeField] private Text textDescription;
 
     private Inventory inventory;
@@ -146,19 +149,23 @@ public class UIInventory : MonoBehaviour
 
     public void UpdateDescriptionText()
     {
+        textName.text = "";
         textDescription.text = "";
-        panelDescription.SetActive(false);
+        panelItem.SetActive(false);
 
         if (slotHovered && !slotDragged)
         {
             ItemStack stack = inventory.GetItemStack(slotHovered.x, slotHovered.y);
             if (stack.data)
             {
-                panelDescription.SetActive(true);
+                panelItem.SetActive(true);
+                textName.text = stack.data.name;
                 textDescription.text = stack.data.description;
 
                 // necessary cuz panel updates weirdly
-                LayoutRebuilder.ForceRebuildLayoutImmediate(panelDescription.GetComponent<RectTransform>());
+                LayoutRebuilder.ForceRebuildLayoutImmediate(panelItem.GetComponent<RectTransform>());
+                LayoutRebuilder.ForceRebuildLayoutImmediate(panelItemName.GetComponent<RectTransform>());
+                LayoutRebuilder.ForceRebuildLayoutImmediate(panelItemDescription.GetComponent<RectTransform>());
             }
         }
     }

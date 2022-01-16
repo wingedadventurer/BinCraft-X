@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Ice Cube
   description: 'Freezes your heart when carried.
 
-    Can only be melted in lava.'
+    Can only be melted in furnace.'
   maxStackCount: 1
   hp: 0
   spriteInventory: {fileID: 21300000, guid: b6eee4a83898cd84f9d7732b56375af5, type: 3}

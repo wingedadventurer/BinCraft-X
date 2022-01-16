@@ -15,9 +15,10 @@ MonoBehaviour:
   name: Ammo
   description: 'Allows firing fireball projectiles.
 
-    Hot to touch, must be contained
+    Too hot to touch, must be
 
-    carefully!'
+    safely
+    contained!'
   maxStackCount: 100
   hp: 0
   spriteInventory: {fileID: 21300000, guid: fcae71c165ee5244e9b267a91d2a01d0, type: 3}
