@@ -33,5 +33,7 @@ public class Shooting : MonoBehaviour
         bullet.transform.position = transformBulletSpawn.transform.position;
         bullet.GetComponent<Bullet>().damage = bulletDamage;
         bullet.GetComponent<Rigidbody>().velocity = ray.direction * bulletSpeed;
+
+        Audio.instance.PlaySFX(SFXID.Fireball);
     }
 }
