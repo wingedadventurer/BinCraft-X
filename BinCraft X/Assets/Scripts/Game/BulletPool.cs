@@ -37,12 +37,4 @@ public class BulletPool : MonoBehaviour
         bullet.SetActive(true);
         return bullet;
     }
-
-    public void SetBulletsEnabled(bool value)
-    {
-        foreach (GameObject gameObject in bullets)
-        {
-            gameObject.SetActive(value);
-        }
-    }
 }

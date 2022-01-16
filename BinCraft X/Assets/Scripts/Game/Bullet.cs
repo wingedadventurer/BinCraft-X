@@ -4,7 +4,22 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] private GameObject prefabParticlesTrail;
+    [SerializeField] private GameObject prefabParticlesExplode;
+
     [HideInInspector] public float damage;
+
+    private GameObject goParticlesTrail;
+
+    //public void SetEnabled(bool value)
+    //{
+
+    //}
+
+    private void OnEnable()
+    {
+        goParticlesTrail = Instantiate(prefabParticlesTrail, transform);
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -21,6 +36,11 @@ public class Bullet : MonoBehaviour
         sfx.SetPosition(transform.position);
         sfx.SetMaxDistance(20);
 
+        goParticlesTrail.GetComponent<ParticleSystem>().Stop();
+        goParticlesTrail.transform.SetParent(null);
+
         gameObject.SetActive(false);
+
+        Instantiate(prefabParticlesExplode, transform.position, Quaternion.identity);
     }
 }

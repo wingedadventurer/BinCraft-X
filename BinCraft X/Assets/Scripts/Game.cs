@@ -40,7 +40,7 @@ public class Game : MonoBehaviour
             FindObjectOfType<Interaction>().enabled = !paused;
             FindObjectOfType<Shooting>().enabled = !paused;
             FindObjectOfType<Well>().enabled = !paused;
-            BulletPool.instance.SetBulletsEnabled(!paused);
+            BulletPool.instance.gameObject.SetActive(!paused);
 
             Time.timeScale = paused ? 0 : 1;
 

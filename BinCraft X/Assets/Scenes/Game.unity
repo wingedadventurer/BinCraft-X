@@ -2437,7 +2437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabBullet: {fileID: 4678763312100190925, guid: 55dc44fd93766f44e8a980a6db8aa22c, type: 3}
-  count: 5
+  count: 20
 --- !u!4 &700222906
 Transform:
   m_ObjectHideFlags: 0
