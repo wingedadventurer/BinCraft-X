@@ -82,7 +82,7 @@ public class Movement : MonoBehaviour
         // update gravity
         if (characterController.isGrounded)
         {
-            if (velocityY < -2.0f)
+            if (velocityY < -4.0f)
             {
                 Audio.instance.PlaySFX(SFXID.Land).SetVolume(0.5f);
                 // sometimes step is played at same time as land so we reset this
