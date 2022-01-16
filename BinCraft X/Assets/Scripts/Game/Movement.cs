@@ -89,6 +89,7 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && Game.instance.playerControllable && characterController.isGrounded)
         {
             velocityY = speedJump;
+            Audio.instance.PlaySFX(SFXID.Jump);
         }
 
         // apply movement and gravity

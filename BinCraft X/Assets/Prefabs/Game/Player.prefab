@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 5692526125181518078}
   - component: {fileID: 1230972058025004755}
   - component: {fileID: 7157315795876521818}
+  - component: {fileID: 2841945427566571269}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -106,6 +107,7 @@ MonoBehaviour:
   itemAmmo: {fileID: 11400000, guid: 0c648c2257bdc654eacf098f46a4f6c8, type: 2}
   itemIceCube: {fileID: 11400000, guid: 277371f452c963641b4a4174fefaf535, type: 2}
   health: {fileID: 5692526125181518078}
+  anim: {fileID: 2841945427566571269}
   Died:
     m_PersistentCalls:
       m_Calls: []
@@ -197,6 +199,22 @@ MonoBehaviour:
   bulletDamage: 25
   transformBulletSpawn: {fileID: 3907677468117844451}
   dataBullet: {fileID: 0}
+--- !u!111 &2841945427566571269
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308661514319966151}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: c4809d3daa374a744b7688c9d2bd9f55, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: c4809d3daa374a744b7688c9d2bd9f55, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &5163562771236228989
 GameObject:
   m_ObjectHideFlags: 0

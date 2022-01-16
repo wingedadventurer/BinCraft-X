@@ -16,6 +16,7 @@ public enum SFXID
     ItemTake,
     Hit,
     Button,
+    Jump,
 }
 
 public class Audio : MonoBehaviour
@@ -35,6 +36,7 @@ public class Audio : MonoBehaviour
     [SerializeField] private AudioClip acItemTake;
     [SerializeField] private AudioClip acHit;
     [SerializeField] private AudioClip acButton;
+    [SerializeField] private AudioClip acJump;
 
     public static Audio instance;
 
@@ -79,6 +81,7 @@ public class Audio : MonoBehaviour
             case SFXID.ItemTake: clip = acItemTake; break;
             case SFXID.Hit: clip = acHit; break;
             case SFXID.Button: clip = acButton; break;
+            case SFXID.Jump: clip = acJump; break;
             default: break;
         }
 

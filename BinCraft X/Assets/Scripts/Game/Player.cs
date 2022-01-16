@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private DataItem itemAmmo;
     [SerializeField] private DataItem itemIceCube;
     [SerializeField] private Health health;
+    [SerializeField] private Animation anim;
 
     [HideInInspector] public UnityEvent Died;
 
@@ -78,5 +79,9 @@ public class Player : MonoBehaviour
         // play footstep SFX
         Audio.instance.PlaySFX(acFootsteps[footstepSFXIndex++]);
         if (footstepSFXIndex >= acFootsteps.Length) { footstepSFXIndex = 0; }
+
+        anim.Stop();
+        anim.Blend(anim.clip.name, 1.0f, 0.2f);
+        //anim.Play();
     }
 }
