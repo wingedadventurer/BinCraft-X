@@ -81,6 +81,13 @@ public class Movement : MonoBehaviour
         // update gravity
         if (characterController.isGrounded)
         {
+            if (velocityY < -2.0f)
+            {
+                Audio.instance.PlaySFX(SFXID.Land).SetVolume(0.7f);
+                // sometimes step is played at same time as land so we reset this
+                // (+ makes no sense to step right after landing)
+                distanceForStep = 0;
+            }
             velocityY = 0;
         }
         velocityY -= gravity * Time.deltaTime;
@@ -89,7 +96,7 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && Game.instance.playerControllable && characterController.isGrounded)
         {
             velocityY = speedJump;
-            Audio.instance.PlaySFX(SFXID.Jump);
+            Audio.instance.PlaySFX(SFXID.Jump).SetVolume(0.8f);
         }
 
         // apply movement and gravity

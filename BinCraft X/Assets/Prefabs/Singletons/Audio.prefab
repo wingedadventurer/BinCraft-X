@@ -184,6 +184,8 @@ MonoBehaviour:
   acHit: {fileID: 8300000, guid: d1f908ef96155a14cae22e5fc37af1b1, type: 3}
   acButton: {fileID: 8300000, guid: eaff198adba9fab449a1f66850246619, type: 3}
   acJump: {fileID: 8300000, guid: b597669d3720a6d48943e73d11982679, type: 3}
+  acLand: {fileID: 8300000, guid: 7ffeae2b1a5548649a7301ee48edea27, type: 3}
+  acLidClose: {fileID: 8300000, guid: f5655fde23ffec24cbe7902e4a9322c9, type: 3}
   acInventoryItemTake: {fileID: 8300000, guid: e57d1e13f52dd0b4e84cc9e141720fc1, type: 3}
   acInventoryItemDrop: {fileID: 8300000, guid: 4679f41ced02b134b83740bba1536023, type: 3}
   acInventoryOpen: {fileID: 8300000, guid: 749b601afc433fc4e8d09328c0f7cb05, type: 3}

@@ -32,6 +32,11 @@ public class SFX : MonoBehaviour
         audioSource.loop = value;
     }
 
+    public void SetVolume(float value)
+    {
+        audioSource.volume = value;
+    }
+
     public void SetPosition(Vector3 position)
     {
         transform.position = position;

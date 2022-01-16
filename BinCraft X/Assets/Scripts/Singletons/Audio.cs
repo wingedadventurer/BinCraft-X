@@ -17,6 +17,8 @@ public enum SFXID
     Hit,
     Button,
     Jump,
+    Land,
+    LidClose,
     InventoryItemTake,
     InventoryItemDrop,
     InventoryOpen,
@@ -41,6 +43,8 @@ public class Audio : MonoBehaviour
     [SerializeField] private AudioClip acHit;
     [SerializeField] private AudioClip acButton;
     [SerializeField] private AudioClip acJump;
+    [SerializeField] private AudioClip acLand;
+    [SerializeField] private AudioClip acLidClose;
     [SerializeField] private AudioClip acInventoryItemTake;
     [SerializeField] private AudioClip acInventoryItemDrop;
     [SerializeField] private AudioClip acInventoryOpen;
@@ -90,6 +94,8 @@ public class Audio : MonoBehaviour
             case SFXID.Hit: clip = acHit; break;
             case SFXID.Button: clip = acButton; break;
             case SFXID.Jump: clip = acJump; break;
+            case SFXID.Land: clip = acLand; break;
+            case SFXID.LidClose: clip = acLidClose; break;
             case SFXID.InventoryItemTake: clip = acInventoryItemTake; break;
             case SFXID.InventoryItemDrop: clip = acInventoryItemDrop; break;
             case SFXID.InventoryOpen: clip = acInventoryOpen; break;

@@ -95,6 +95,7 @@ public class Well : MonoBehaviour
             goLid.SetActive(true);
             UpdateInteractionText();
             CancelInvoke("SpawnEnemy");
+            Audio.instance.PlaySFX(SFXID.LidClose).SetPosition(transform.position);
         }
     }
 
