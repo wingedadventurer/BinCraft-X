@@ -29,8 +29,6 @@ public class Enemy : MonoBehaviour
 
     [HideInInspector] public UnityEvent Died;
 
-    private float tRandomSFX;
-
     private void Awake()
     {
         Data = data;
@@ -44,7 +42,7 @@ public class Enemy : MonoBehaviour
         Data = data;
         UpdateColorHealth();
 
-        if (data.sfx.Length > 0)
+        if (data.sfxRandom.Length > 0)
         {
             Invoke("PlayRandomSFX", Random.Range(delayRandomSFXMin, delayRandomSFXMax));
         }
@@ -75,6 +73,7 @@ public class Enemy : MonoBehaviour
     private void OnHealthChanged()
     {
         UpdateColorHealth();
+        PlayHurtSFX();
     }
 
     private void OnHealthDepleted()
@@ -85,10 +84,21 @@ public class Enemy : MonoBehaviour
 
     private void PlayRandomSFX()
     {
-        AudioClip ac = data.sfx[Random.Range(0, data.sfx.Length)];
+        AudioClip ac = data.sfxRandom[Random.Range(0, data.sfxRandom.Length)];
         SFX sfx = Audio.instance.PlaySFX(ac);
         sfx.SetPosition(transform.position);
         sfx.SetMaxDistance(25);
         Invoke("PlayRandomSFX", Random.Range(delayRandomSFXMin, delayRandomSFXMax));
+    }
+
+    private void PlayHurtSFX()
+    {
+        if (data.sfxRandom.Length > 0)
+        {
+            AudioClip ac = data.sfxHurt[Random.Range(0, data.sfxRandom.Length)];
+            SFX sfx = Audio.instance.PlaySFX(ac);
+            sfx.SetPosition(transform.position);
+            sfx.SetMaxDistance(25);
+        }
     }
 }

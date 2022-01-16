@@ -15,6 +15,10 @@ MonoBehaviour:
   hp: 100
   mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
   material: {fileID: 2100000, guid: ca2e779c5df06cc40a203b95e9d9c2d8, type: 2}
-  sfx:
+  sfxRandom:
   - {fileID: 8300000, guid: f1d3f32964d12fb40aa63a8d4dfd3b52, type: 3}
   - {fileID: 8300000, guid: 888d7d6bf3240e84b8c9610898a4f21c, type: 3}
+  sfxHurt:
+  - {fileID: 8300000, guid: 19857a61848c9814088a44f4bc4bc06c, type: 3}
+  - {fileID: 8300000, guid: 907e51f55a8ce6a4ea741e72a2d79c19, type: 3}
+  - {fileID: 8300000, guid: 32504ad65a0ccea458dc68036fc33384, type: 3}

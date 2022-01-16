@@ -12,6 +12,6 @@ public class DataEnemy : ScriptableObject
     public Mesh mesh;
     public Material material;
 
-    [Header("Random SFX")]
-    public AudioClip[] sfx;
+    public AudioClip[] sfxRandom;
+    public AudioClip[] sfxHurt;
 }
