@@ -26,4 +26,20 @@ public class SFX : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void SetLoop(bool value)
+    {
+        audioSource.loop = value;
+    }
+
+    public void SetPosition(Vector3 position)
+    {
+        transform.position = position;
+        audioSource.spatialBlend = 1;
+    }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
 }

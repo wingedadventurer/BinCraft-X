@@ -178,6 +178,8 @@ MonoBehaviour:
   acMusicMenu: {fileID: 8300000, guid: 227aa6f0fc5194f4189e278eb685fbfe, type: 3}
   acMusicGame: {fileID: 8300000, guid: fab0c277bbea6b647aabcbc90927efc8, type: 3}
   acFireball: {fileID: 8300000, guid: 69db3f109a7bd4b49852aee9a07fb4b3, type: 3}
+  acFireStart: {fileID: 8300000, guid: 3533ad435f8707840909e90e3a080f36, type: 3}
+  acFireLoop: {fileID: 8300000, guid: ad5f0eedcb5a0ba4fbc05c0ef76bf6b8, type: 3}
 --- !u!1 &9044970125950414823
 GameObject:
   m_ObjectHideFlags: 0

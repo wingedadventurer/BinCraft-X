@@ -20,6 +20,7 @@ public class Furnace : MonoBehaviour
     private float tBurn;
     private bool canInteract;
     private bool interactEntered;
+    private SFX sfxFireLoop;
 
     [HideInInspector] public UnityEvent Finished;
 
@@ -63,6 +64,7 @@ public class Furnace : MonoBehaviour
                 canInteract = true;
                 Finished.Invoke();
                 UpdateInteractionText();
+                sfxFireLoop.Destroy();
             }
         }
     }
@@ -94,6 +96,10 @@ public class Furnace : MonoBehaviour
             goIceCube.SetActive(true);
             canInteract = false;
             UpdateInteractionText();
+            Audio.instance.PlaySFX(SFXID.FireStart);
+            sfxFireLoop = Audio.instance.PlaySFX(SFXID.FireLoop);
+            sfxFireLoop.SetPosition(transform.position);
+            sfxFireLoop.SetLoop(true);
         }
     }
 

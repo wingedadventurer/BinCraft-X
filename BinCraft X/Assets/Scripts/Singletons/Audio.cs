@@ -10,7 +10,9 @@ public enum SongID
 
 public enum SFXID
 {
-    Fireball
+    Fireball,
+    FireStart,
+    FireLoop,
 }
 
 public class Audio : MonoBehaviour
@@ -25,6 +27,8 @@ public class Audio : MonoBehaviour
 
     [Header("SFXs")]
     [SerializeField] private AudioClip acFireball;
+    [SerializeField] private AudioClip acFireStart;
+    [SerializeField] private AudioClip acFireLoop;
 
     public static Audio instance;
 
@@ -57,13 +61,15 @@ public class Audio : MonoBehaviour
         }
     }
 
-    public void PlaySFX(SFXID id)
+    public SFX PlaySFX(SFXID id)
     {
         AudioClip clip = null;
 
         switch (id)
         {
             case SFXID.Fireball: clip = acFireball; break;
+            case SFXID.FireStart: clip = acFireStart; break;
+            case SFXID.FireLoop: clip = acFireLoop; break;
             default: break;
         }
 
@@ -74,7 +80,11 @@ public class Audio : MonoBehaviour
             SFX sfx = goAS.GetComponent<SFX>();
             sfx.SetClip(clip);
             sfx.Play();
+
+            return sfx;
         }
+
+        return null;
     }
 
     public void PlayGameMusic()

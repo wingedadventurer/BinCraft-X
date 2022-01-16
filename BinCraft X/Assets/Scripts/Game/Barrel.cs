@@ -18,6 +18,8 @@ public class Barrel : MonoBehaviour
     private bool canInteract;
     private bool interactEntered;
 
+    private SFX sfxFireLoop;
+
     private void Awake()
     {
         particleFire.Stop();
@@ -53,6 +55,7 @@ public class Barrel : MonoBehaviour
                 lightFire.SetActive(false);
                 canInteract = true;
                 UpdateInteractionText();
+                sfxFireLoop.Destroy();
             }
         }
     }
@@ -82,6 +85,11 @@ public class Barrel : MonoBehaviour
             lightFire.SetActive(true);
             canInteract = false;
             UpdateInteractionText();
+            Audio.instance.PlaySFX(SFXID.FireStart);
+
+            sfxFireLoop = Audio.instance.PlaySFX(SFXID.FireLoop);
+            sfxFireLoop.SetPosition(transform.position);
+            sfxFireLoop.SetLoop(true);
         }
     }
 

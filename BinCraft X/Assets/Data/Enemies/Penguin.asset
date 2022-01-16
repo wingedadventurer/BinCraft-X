@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8c825557ad68149b871ab0228ba1dc, type: 3}
   m_Name: Penguin
   m_EditorClassIdentifier: 
-  hp: 200
+  hp: 100
   mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
   material: {fileID: 2100000, guid: ca2e779c5df06cc40a203b95e9d9c2d8, type: 2}
