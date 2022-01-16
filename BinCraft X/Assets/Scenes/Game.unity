@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.21698111, g: 0.19391142, b: 0.1934407, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1.5
+  m_AmbientIntensity: 0.6
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 7a8675eb396637d43b4ba0a69cc715a5, type: 2}
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 23383137c56f9f647a6dc4cdd4d43051, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -3269,11 +3269,11 @@ Transform:
   - {fileID: 1522113374}
   - {fileID: 773553199}
   - {fileID: 1055631803}
-  - {fileID: 1449145460}
   - {fileID: 298131063}
   - {fileID: 905385097}
   - {fileID: 551192402}
   - {fileID: 1718641139}
+  - {fileID: 1449145460}
   - {fileID: 124100095}
   - {fileID: 636845316}
   - {fileID: 1806800988}
@@ -4681,8 +4681,8 @@ Transform:
   - {fileID: 877084567}
   - {fileID: 1195337145}
   - {fileID: 134622115}
-  - {fileID: 511246316}
   - {fileID: 1240013831}
+  - {fileID: 511246316}
   - {fileID: 1926732040}
   - {fileID: 59429112}
   m_Father: {fileID: 655815877}
