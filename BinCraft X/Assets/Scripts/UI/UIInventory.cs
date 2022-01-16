@@ -14,6 +14,7 @@ public class UIInventory : MonoBehaviour
     [SerializeField] private GridLayoutGroup containerGridLayoutGroup;
     [SerializeField] private RectTransform rectTransformSlotDrag;
     [SerializeField] private RectTransform rectTransformMouse;
+    [SerializeField] private Animator animator;
 
     private UIInventorySlot[,] slots;
     [SerializeField] private UIInventorySlot slotDrag;
@@ -30,8 +31,8 @@ public class UIInventory : MonoBehaviour
     private Inventory inventory;
 
     private bool willClearDragged;
-
     private bool shiftDragged;
+    private bool visible;
 
     private void Awake()
     {
@@ -45,6 +46,14 @@ public class UIInventory : MonoBehaviour
         UpdateSlots();
         UpdateDragSlot();
         UpdateDescriptionText();
+        SetPanelVisible(false, true);
+    }
+
+    private void Start()
+    {
+        panel.SetActive(true);
+        //animator.Play("HideInventory", 1, 1);
+        
     }
 
     private void Update()
@@ -73,7 +82,17 @@ public class UIInventory : MonoBehaviour
 
     public void SetPanelVisible(bool value, bool quiet = false)
     {
-        panel.SetActive(value);
+        visible = value;
+
+        if (value)
+        {
+            //animator.Play("ShowInventory", 0, 0);
+            animator.Play("ShowInventory", 0, 0);
+        }
+        else
+        {
+            animator.Play("HideInventory", 0, 0);
+        }
 
         // if we were dragging, cleanup
         if (!value && slotDragged)
@@ -93,7 +112,7 @@ public class UIInventory : MonoBehaviour
 
     public bool GetPanelVisible()
     {
-        return panel.activeSelf;
+        return visible;
     }
 
     public void AddSlots()
