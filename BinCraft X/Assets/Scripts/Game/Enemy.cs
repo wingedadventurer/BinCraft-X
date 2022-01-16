@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
         AudioClip ac = data.sfx[Random.Range(0, data.sfx.Length)];
         SFX sfx = Audio.instance.PlaySFX(ac);
         sfx.SetPosition(transform.position);
-        sfx.SetMaxDistance(30);
+        sfx.SetMaxDistance(25);
         Invoke("PlayRandomSFX", Random.Range(delayRandomSFXMin, delayRandomSFXMax));
     }
 }

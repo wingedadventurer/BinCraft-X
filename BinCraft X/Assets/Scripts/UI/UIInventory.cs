@@ -52,6 +52,7 @@ public class UIInventory : MonoBehaviour
     private void Start()
     {
         panel.SetActive(true);
+
         animator.Play("HideInventory", 0, 1);
 
     }
