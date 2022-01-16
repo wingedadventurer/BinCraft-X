@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Movement : MonoBehaviour
 {
@@ -11,12 +12,17 @@ public class Movement : MonoBehaviour
     public float gravity;
     public float speedJump;
 
+    [SerializeField] private float distancePerStep;
+
     [Header("Ref")]
     public CharacterController characterController;
     public Camera camHead;
 
     private Vector2 velocityMovement;
     private float velocityY;
+    private float distanceForStep;
+
+    [HideInInspector] public UnityEvent Stepped;
 
     void Update()
     {
@@ -55,6 +61,17 @@ public class Movement : MonoBehaviour
 
         // clamp movement velocity
         velocityMovement = Vector3.ClampMagnitude(velocityMovement, speedMove);
+
+        // update distance for footstep sfx
+        if (characterController.isGrounded)
+        {
+            distanceForStep += velocityMovement.magnitude * Time.deltaTime;
+            if (distanceForStep >= distancePerStep)
+            {
+                distanceForStep -= distancePerStep;
+                Stepped.Invoke();
+            }
+        }
 
         // calculate movement
         Vector3 movement = Vector3.zero;

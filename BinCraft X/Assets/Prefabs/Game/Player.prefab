@@ -100,6 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthDecreaseRate: 1
   healthDecreaseRatePerIceCube: 2
+  acFootsteps:
+  - {fileID: 8300000, guid: 49c260f05cce6e94bb296f5c636dd548, type: 3}
+  - {fileID: 8300000, guid: ed72c7c7f14f3b4419d446ddca43bc84, type: 3}
   itemAmmo: {fileID: 11400000, guid: 0c648c2257bdc654eacf098f46a4f6c8, type: 2}
   itemIceCube: {fileID: 11400000, guid: 277371f452c963641b4a4174fefaf535, type: 2}
   health: {fileID: 5692526125181518078}
@@ -134,12 +137,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accMove: 25
   dccMove: 40
-  speedWalkMax: 3
-  speedRunMax: 5.5
+  speedWalkMax: 2.5
+  speedRunMax: 4.5
   gravity: 12
   speedJump: 4.5
+  distancePerStep: 1.5
   characterController: {fileID: 4470392158604051388}
   camHead: {fileID: 884386163586549319}
+  Stepped:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5692526125181518078
 MonoBehaviour:
   m_ObjectHideFlags: 0

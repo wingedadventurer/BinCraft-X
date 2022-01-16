@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private float healthDecreaseRate;
     [SerializeField] private float healthDecreaseRatePerIceCube;
+    [SerializeField] private AudioClip[] acFootsteps;
 
     [Header("Ref")]
     [SerializeField] private DataItem itemAmmo;
@@ -16,7 +17,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public UnityEvent Died;
 
     private int countIceCubes;
-
+    private int footstepSFXIndex;
     private Inventory inventory;
     private UIGame uiGame;
 
@@ -34,6 +35,8 @@ public class Player : MonoBehaviour
         health.Depleted.AddListener(OnHealthDepleted);
         inventory.Changed.AddListener(OnInventoryChanged);
         uiGame.SetHealth(health.GetHP(), health.GetHPMax());
+
+        GetComponent<Movement>().Stepped.AddListener(OnStepped);
 
         UpdateHealthUI();
         UpdateAmmoUI();
@@ -68,5 +71,12 @@ public class Player : MonoBehaviour
     private void UpdateAmmoUI()
     {
         uiGame.SetAmmo(inventory.GetItemCount(itemAmmo));
+    }
+
+    private void OnStepped()
+    {
+        // play footstep SFX
+        Audio.instance.PlaySFX(acFootsteps[footstepSFXIndex++]);
+        if (footstepSFXIndex >= acFootsteps.Length) { footstepSFXIndex = 0; }
     }
 }
