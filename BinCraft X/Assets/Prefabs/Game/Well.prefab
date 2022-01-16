@@ -267,6 +267,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Well Lid
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2043e61e20366bc4dbcdbc947a110d7a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2043e61e20366bc4dbcdbc947a110d7a, type: 3}
 --- !u!1 &5972188732728993939 stripped

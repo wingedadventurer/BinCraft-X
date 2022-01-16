@@ -73,7 +73,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.7076588, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.52086806, b: 1, a: 1}
   m_Intensity: 10
   m_Range: 5
   m_SpotAngle: 30
@@ -1494,8 +1494,8 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.990566, g: 0.8668028, b: 0.06074228, a: 1}
-        key1: {r: 1, g: 0.19479549, b: 0.07075471, a: 1}
+        key0: {r: 0.058823552, g: 0.862424, b: 0.99215686, a: 1}
+        key1: {r: 0.07058823, g: 0.14086919, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -5052,6 +5052,9 @@ MonoBehaviour:
   goLightFire: {fileID: 3310534132188624274}
   goIceCube: {fileID: 2962689582707054075}
   transformIceCubePivot: {fileID: 3147433864370377419}
+  Finished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7496591403339485230
 GameObject:
   m_ObjectHideFlags: 0
