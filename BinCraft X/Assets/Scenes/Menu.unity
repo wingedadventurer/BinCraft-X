@@ -2421,8 +2421,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Design, code, art, models by Karlo Ko\u0161\u010Dal.\n\nSFX are CC0.\n\n\"The
-    Snow Queen\" & \"Come Play with Me\" Kevin MacLeod (incompetech.com)\r\nLicensed
+  m_Text: "Design, code, art, models by Karlo Ko\u0161\u010Dal.\n\nSFX are CC0.\n\n\"Shores
+    of Avalon\" & \"Come Play with Me\" Kevin MacLeod (incompetech.com)\r\nLicensed
     under Creative Commons: By Attribution 4.0 License\r\nhttp://creativecommons.org/licenses/by/4.0/"
 --- !u!222 &1899175619
 CanvasRenderer:
