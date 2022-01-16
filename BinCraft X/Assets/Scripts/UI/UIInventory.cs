@@ -216,7 +216,7 @@ public class UIInventory : MonoBehaviour
             inventory.SetDragStack(stack.data, stack.amount);
             inventory.ClearItemStack(slot.x, slot.y);
             UpdateDescriptionText();
-            Audio.instance.PlaySFX(SFXID.InventoryItemTake);
+            Audio.instance.PlaySFX(SFXID.InventoryItemTake).SetVolume(0.6f);
         }
     }
 
@@ -225,7 +225,7 @@ public class UIInventory : MonoBehaviour
         if (slotDragged && slotHovered)
         {
             inventory.MergeOrSwapDragStack(slotDragged.x, slotDragged.y, slotHovered.x, slotHovered.y);
-            Audio.instance.PlaySFX(SFXID.InventoryItemDrop);
+            Audio.instance.PlaySFX(SFXID.InventoryItemDrop).SetVolume(0.8f);
         }
         willClearDragged = true;
     }
@@ -244,7 +244,7 @@ public class UIInventory : MonoBehaviour
                 inventory.SetStack(slot.x, slot.y, stack.data, stack.amount - splitAmount);
                 inventory.SetDragStack(stack.data, splitAmount);
                 shiftDragged = true;
-                Audio.instance.PlaySFX(SFXID.InventoryItemTake);
+                Audio.instance.PlaySFX(SFXID.InventoryItemTake).SetVolume(0.6f);
             }
             else
             {
@@ -255,7 +255,7 @@ public class UIInventory : MonoBehaviour
                 inventory.SetStack(slot.x, slot.y, stack.data, stack.amount - splitAmount);
                 inventory.SetDragStack(stack.data, splitAmount);
                 shiftDragged = true;
-                Audio.instance.PlaySFX(SFXID.InventoryItemTake);
+                Audio.instance.PlaySFX(SFXID.InventoryItemTake).SetVolume(0.6f);
             }
         }
     }
@@ -267,7 +267,7 @@ public class UIInventory : MonoBehaviour
             if (shiftDragged)
             {
                 inventory.MergeOrSwapDragStack(slotDragged.x, slotDragged.y, slotHovered.x, slotHovered.y);
-                Audio.instance.PlaySFX(SFXID.InventoryItemDrop);
+                Audio.instance.PlaySFX(SFXID.InventoryItemDrop).SetVolume(0.8f);
             }
         }
         willClearDragged = true;

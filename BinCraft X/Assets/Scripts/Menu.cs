@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    public GameObject panelMain, panelLoading;
+    public GameObject panelMain;
+    public GameObject panelCredits;
+    public GameObject panelLoading;
     public Slider slider;
 
     private void Start()
     {
         panelMain.SetActive(true);
+        panelCredits.SetActive(false);
         panelLoading.SetActive(false);
         Audio.instance.PlaySong(SongID.Menu);
     }

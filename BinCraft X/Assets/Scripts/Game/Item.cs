@@ -111,7 +111,7 @@ public class Item : MonoBehaviour
 
             DOTween.To(() => fPick, x => fPick = x, 1.0f, 0.15f).SetEase(Ease.InCubic).OnComplete(OnPickTweenComplete);
 
-            Audio.instance.PlaySFX(SFXID.ItemTake);
+            Audio.instance.PlaySFX(SFXID.ItemTake).SetVolume(0.8f);
 
             picked = true;
         }
