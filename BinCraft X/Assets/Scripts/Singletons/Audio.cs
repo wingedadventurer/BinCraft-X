@@ -13,6 +13,9 @@ public enum SFXID
     Fireball,
     FireStart,
     FireLoop,
+    ItemTake,
+    Hit,
+    Button,
 }
 
 public class Audio : MonoBehaviour
@@ -29,6 +32,9 @@ public class Audio : MonoBehaviour
     [SerializeField] private AudioClip acFireball;
     [SerializeField] private AudioClip acFireStart;
     [SerializeField] private AudioClip acFireLoop;
+    [SerializeField] private AudioClip acItemTake;
+    [SerializeField] private AudioClip acHit;
+    [SerializeField] private AudioClip acButton;
 
     public static Audio instance;
 
@@ -70,6 +76,9 @@ public class Audio : MonoBehaviour
             case SFXID.Fireball: clip = acFireball; break;
             case SFXID.FireStart: clip = acFireStart; break;
             case SFXID.FireLoop: clip = acFireLoop; break;
+            case SFXID.ItemTake: clip = acItemTake; break;
+            case SFXID.Hit: clip = acHit; break;
+            case SFXID.Button: clip = acButton; break;
             default: break;
         }
 

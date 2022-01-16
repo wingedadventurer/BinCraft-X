@@ -38,6 +38,11 @@ public class SFX : MonoBehaviour
         audioSource.spatialBlend = 1;
     }
 
+    public void SetMaxDistance(float value)
+    {
+        audioSource.maxDistance = value;
+    }
+
     public void Destroy()
     {
         Destroy(gameObject);

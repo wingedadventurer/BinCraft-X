@@ -180,6 +180,9 @@ MonoBehaviour:
   acFireball: {fileID: 8300000, guid: 69db3f109a7bd4b49852aee9a07fb4b3, type: 3}
   acFireStart: {fileID: 8300000, guid: 3533ad435f8707840909e90e3a080f36, type: 3}
   acFireLoop: {fileID: 8300000, guid: ad5f0eedcb5a0ba4fbc05c0ef76bf6b8, type: 3}
+  acItemTake: {fileID: 8300000, guid: e7e07e30340bdf24dbd59a10fb977c9a, type: 3}
+  acHit: {fileID: 8300000, guid: d1f908ef96155a14cae22e5fc37af1b1, type: 3}
+  acButton: {fileID: 8300000, guid: eaff198adba9fab449a1f66850246619, type: 3}
 --- !u!1 &9044970125950414823
 GameObject:
   m_ObjectHideFlags: 0
