@@ -18,6 +18,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    [SerializeField] private float delayRandomSFXMin;
+    [SerializeField] private float delayRandomSFXMax;
+
     [Header("Ref")]
     [SerializeField] private MeshRenderer[] meshRenderersHealthGradient;
     [SerializeField] private DataEnemy data;
@@ -25,6 +28,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Gradient gradientHealth;
 
     [HideInInspector] public UnityEvent Died;
+
+    private float tRandomSFX;
 
     private void Awake()
     {
@@ -38,6 +43,11 @@ public class Enemy : MonoBehaviour
     {
         Data = data;
         UpdateColorHealth();
+
+        if (data.sfx.Length > 0)
+        {
+            Invoke("PlayRandomSFX", Random.Range(delayRandomSFXMin, delayRandomSFXMax));
+        }
     }
 
     private void ApplyData()
@@ -71,5 +81,13 @@ public class Enemy : MonoBehaviour
     {
         Died.Invoke();
         Destroy(gameObject);
+    }
+
+    private void PlayRandomSFX()
+    {
+        AudioClip ac = data.sfx[Random.Range(0, data.sfx.Length)];
+        SFX sfx = Audio.instance.PlaySFX(ac);
+        sfx.SetPosition(transform.position);
+        Invoke("PlayRandomSFX", Random.Range(delayRandomSFXMin, delayRandomSFXMax));
     }
 }

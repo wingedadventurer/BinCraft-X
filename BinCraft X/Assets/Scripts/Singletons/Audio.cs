@@ -73,6 +73,11 @@ public class Audio : MonoBehaviour
             default: break;
         }
 
+        return PlaySFX(clip);
+    }
+
+    public SFX PlaySFX(AudioClip clip)
+    {
         if (clip)
         {
             GameObject goAS = Instantiate(prefabSFX, SFXContainer.transform);

@@ -115,6 +115,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b233b2d0544494e88bbe562d1bbc78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delayRandomSFXMin: 1
+  delayRandomSFXMax: 4
   meshRenderersHealthGradient:
   - {fileID: 9189829120597197818}
   data: {fileID: 11400000, guid: 97e42c7f39106a347ab40fc4d5c0b43f, type: 2}
