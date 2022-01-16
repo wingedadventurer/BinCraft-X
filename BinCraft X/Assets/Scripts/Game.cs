@@ -145,6 +145,7 @@ public class Game : MonoBehaviour
         running = false;
         Paused = true;
         textMenu.text = TEXT_MENU_WIN;
+        textMenu.color = new Color32(229, 132, 0, 255);
     }
 
     public void OnGameLose()
@@ -152,6 +153,7 @@ public class Game : MonoBehaviour
         running = false;
         Paused = true;
         textMenu.text = TEXT_MENU_LOSE;
+        textMenu.color = new Color32(57, 126, 173, 255);
     }
 
     public void SpawnItem(DataItem data, int amount)
