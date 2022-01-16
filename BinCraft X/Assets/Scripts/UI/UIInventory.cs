@@ -71,7 +71,7 @@ public class UIInventory : MonoBehaviour
         }
     }
 
-    public void SetPanelVisible(bool value)
+    public void SetPanelVisible(bool value, bool quiet = false)
     {
         panel.SetActive(value);
 
@@ -83,6 +83,11 @@ public class UIInventory : MonoBehaviour
             UpdateDescriptionText();
             shiftDragged = false;
             slotDrag.gameObject.SetActive(false);
+        }
+
+        if (!quiet)
+        {
+            Audio.instance.PlaySFX(value ? SFXID.InventoryOpen : SFXID.InventoryClose);
         }
     }
 
@@ -192,6 +197,7 @@ public class UIInventory : MonoBehaviour
             inventory.SetDragStack(stack.data, stack.amount);
             inventory.ClearItemStack(slot.x, slot.y);
             UpdateDescriptionText();
+            Audio.instance.PlaySFX(SFXID.InventoryItemTake);
         }
     }
 
@@ -200,6 +206,7 @@ public class UIInventory : MonoBehaviour
         if (slotDragged && slotHovered)
         {
             inventory.MergeOrSwapDragStack(slotDragged.x, slotDragged.y, slotHovered.x, slotHovered.y);
+            Audio.instance.PlaySFX(SFXID.InventoryItemDrop);
         }
         willClearDragged = true;
     }
@@ -218,6 +225,7 @@ public class UIInventory : MonoBehaviour
                 inventory.SetStack(slot.x, slot.y, stack.data, stack.amount - splitAmount);
                 inventory.SetDragStack(stack.data, splitAmount);
                 shiftDragged = true;
+                Audio.instance.PlaySFX(SFXID.InventoryItemTake);
             }
             else
             {
@@ -228,6 +236,7 @@ public class UIInventory : MonoBehaviour
                 inventory.SetStack(slot.x, slot.y, stack.data, stack.amount - splitAmount);
                 inventory.SetDragStack(stack.data, splitAmount);
                 shiftDragged = true;
+                Audio.instance.PlaySFX(SFXID.InventoryItemTake);
             }
         }
     }
@@ -239,6 +248,7 @@ public class UIInventory : MonoBehaviour
             if (shiftDragged)
             {
                 inventory.MergeOrSwapDragStack(slotDragged.x, slotDragged.y, slotHovered.x, slotHovered.y);
+                Audio.instance.PlaySFX(SFXID.InventoryItemDrop);
             }
         }
         willClearDragged = true;

@@ -184,6 +184,10 @@ MonoBehaviour:
   acHit: {fileID: 8300000, guid: d1f908ef96155a14cae22e5fc37af1b1, type: 3}
   acButton: {fileID: 8300000, guid: eaff198adba9fab449a1f66850246619, type: 3}
   acJump: {fileID: 8300000, guid: b597669d3720a6d48943e73d11982679, type: 3}
+  acInventoryItemTake: {fileID: 8300000, guid: e57d1e13f52dd0b4e84cc9e141720fc1, type: 3}
+  acInventoryItemDrop: {fileID: 8300000, guid: 4679f41ced02b134b83740bba1536023, type: 3}
+  acInventoryOpen: {fileID: 8300000, guid: 749b601afc433fc4e8d09328c0f7cb05, type: 3}
+  acInventoryClose: {fileID: 8300000, guid: 1210077ed0d217a4a96ce34549930fe7, type: 3}
 --- !u!1 &9044970125950414823
 GameObject:
   m_ObjectHideFlags: 0

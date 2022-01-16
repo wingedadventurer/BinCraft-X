@@ -71,7 +71,7 @@ public class Game : MonoBehaviour
         canvas.SetActive(true);
         panelPause.SetActive(false);
         UIGame.instance.SetPanelVisible(true);
-        UIInventory.instance.SetPanelVisible(false);
+        UIInventory.instance.SetPanelVisible(false, true);
 
         Paused = false;
         playerControllable = true;
